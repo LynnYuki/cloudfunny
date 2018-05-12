@@ -7,4 +7,6 @@
     <!--底部Tint 颜色-->
     <color name="color_nav_Item_unselected">#4d4747</color>
     <color name="color_nav_item_selected">@android:color/holo_blue_dark</color>
+
+    <color name="black">#000000</color>
 </resources>

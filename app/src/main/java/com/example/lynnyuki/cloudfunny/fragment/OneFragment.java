@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.design.widget.TabLayout;
-import android.view.LayoutInflater;
+
 
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.adapter.OneFragmentPageAdapter;
-import com.example.lynnyuki.cloudfunny.fragment.BaseFragment;
+
 
 import butterknife.BindView;
 import butterknife.BindArray;
@@ -45,8 +45,10 @@ public class OneFragment extends BaseFragment {
     @Override
     protected  void initListener(View view){
         myAdapter = new OneFragmentPageAdapter(getChildFragmentManager(),myTitles);
+
         myViewPager.setAdapter(myAdapter);
         myTabLayout.setupWithViewPager(myViewPager);
+        myViewPager.setOffscreenPageLimit(3);
     }
 
 }

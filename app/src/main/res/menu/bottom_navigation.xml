@@ -9,13 +9,13 @@
             android:id="@+id/nav_one"
             android:icon="@drawable/ic_explore_white_36dp"
             android:enabled="true"
-            android:title="@string/shouye" />
+            android:title="@string/picture" />
 
         <item
             android:id="@+id/nav_two"
             android:icon="@drawable/ic_favorite_border_white_36dp"
             android:enabled="true"
-            android:title="@string/picture" />
+            android:title="@string/article" />
 
         <item
             android:id="@+id/nav_three"

@@ -1,4 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+greendao {
+    schemaVersion 1
+    daoPackage 'com.example.lynnyuki.cloudfunny.model.db'
+    targetGenDir 'src/main/java'
+}
 
 android {
     compileSdkVersion 26
@@ -20,16 +27,16 @@ android {
 ext {
     supportLibVersion = '26.1.0'
     //  Glide 4.4以上需要 27.0.2的支持
-    glideVersion = '3.7.0'
+    glideVersion = '4.3.1'
     retrofitVersion = '2.4.0'
     rxjavaVersion = '2.1.9'
     converter_gsonVersion = '2.3.0'
     rxandroidVersion = '2.0.2'
     adapter_rxjavaVersion = '2.3.0'
-
     butterknifeVersion = '8.8.1'
 }
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
@@ -38,12 +45,31 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    // Retrofit 相关
+
+    // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${converter_gsonVersion}"
     implementation "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
     implementation "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${adapter_rxjavaVersion}"
+
+    //OKHttp
+    implementation "com.squareup.okhttp3:okhttp:3.10.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
+
+    //高德地图定位
+    implementation "com.amap.api:location:3.6.1"
+
+    //GreenDao
+    implementation "org.greenrobot:greendao:3.2.2"
+    implementation "org.greenrobot:greendao-generator:3.2.2"
+
+    //Jsoup
+    implementation "org.jsoup:jsoup:1.10.3"
+
+    //Fragmentation
+    implementation "me.yokeyword:fragmentation:1.1.6"
+    implementation "me.yokeyword:fragmentation-swipeback:1.1.6"
 
     // ButterKnife
     implementation "com.jakewharton:butterknife:${butterknifeVersion}"
@@ -51,7 +77,18 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:${glideVersion}"
-    //annotationProcessor "com.github.bumptech.glide:compiler:${glideVersion}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${glideVersion}"
+
+    //Dagger2
+    implementation "com.google.dagger:dagger:2.11"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
+
+    //Unsplash
+    implementation "com.kc.androidunsplash:androidunsplash:0.1.2"
+
+    //JiaoZiVideoPlayer
+    implementation "cn.jzvd:jiaozivideoplayer:6.2.7"
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34"
 
 
 }

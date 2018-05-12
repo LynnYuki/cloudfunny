@@ -3,15 +3,22 @@
     <string name="title_activity_base">BaseActivity</string>
 
     <string-array name="tittles">
-        <item name="zhihu">知乎日报</item>
-        <item name="weixin">微信精选</item>
-        <item name="toutiao">今日头条</item>
+        <item name="popular">最热美图</item>
+        <item name="latest">最新美图</item>
+        <item name="oldest">最近美图</item>
     </string-array>
-    <string name="shouye">首页</string>
+
+
+    <string name="article">热文</string>
     <string name="picture">美图</string>
     <string name="video">视频</string>
     <string name="set">我的</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">打开</string>
     <string name="drawer_close">关闭</string>
+    <string name="no_network">当前网络不可用，请检查网络情况</string>
+    <string name="empty">暂无相关数据</string>
+    <string name="collector">收藏管理</string>
+    <string name="nightmodel">夜间模式</string>
+    <string name="setting">系统设置</string>
 </resources>

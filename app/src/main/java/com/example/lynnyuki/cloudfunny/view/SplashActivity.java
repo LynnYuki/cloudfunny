@@ -26,7 +26,7 @@ public class SplashActivity extends FragmentActivity {
         ImageView im = findViewById(R.id.iv_splash);
         im.setImageBitmap(bitmap);
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.3f,1.0f);
-        alphaAnimation .setDuration(3000);
+        alphaAnimation .setDuration(1000);
         view.startAnimation(alphaAnimation);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener(){
             @Override

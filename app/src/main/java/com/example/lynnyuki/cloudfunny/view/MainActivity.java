@@ -102,7 +102,7 @@ public  class MainActivity extends BaseActivity implements BottomNavigationView.
 
             case R.id.nav_two:
                 Log.e(TAG, "TWO");
-                mToolbar.setTitle("美图");
+                mToolbar.setTitle("热文");
                 index = 1;
                 break;
 
