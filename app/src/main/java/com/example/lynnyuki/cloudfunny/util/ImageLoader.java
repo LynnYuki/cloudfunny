@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.config.GlideApp;
 
@@ -80,6 +81,17 @@ public class ImageLoader {
                 .error(imgRes)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .priority(Priority.LOW)
+                .into(imageView);
+    }
+    public static void loadUnsplash(Context context,String imgUrl,ImageView imageView){
+        GlideApp.with(context)
+                .load(imgUrl)
+                .priority(Priority.LOW)
+                .fitCenter()
+                .placeholder(R.drawable.ic_empty0)
+                .error(R.drawable.ic_empty0)
+                .transition(DrawableTransitionOptions.withCrossFade(1000))
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(imageView);
     }
 }

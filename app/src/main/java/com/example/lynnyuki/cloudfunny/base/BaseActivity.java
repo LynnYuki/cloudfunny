@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 
+import com.kc.unsplash.Unsplash;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
 
 public abstract class BaseActivity extends AppCompatActivity {
+
     private static final String TAG = "BaseActivity";
     private  Unbinder myUnbinder;
     @Override
@@ -21,7 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar == null){
-            Log.e(TAG,"oncCreate:null");
+            Log.d(TAG,"创建");
         }
     }
 
@@ -32,5 +35,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected  void onDestroy(){
         super.onDestroy();
         myUnbinder.unbind();
+        Log.d(TAG,"销毁");
     }
+
+
+
 }

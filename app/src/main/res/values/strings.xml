@@ -5,7 +5,7 @@
     <string-array name="tittles">
         <item name="popular">最热美图</item>
         <item name="latest">最新美图</item>
-        <item name="oldest">最近美图</item>
+        <item name="oldest">精选美图</item>
     </string-array>
 
 
@@ -21,4 +21,8 @@
     <string name="collector">收藏管理</string>
     <string name="nightmodel">夜间模式</string>
     <string name="setting">系统设置</string>
+
+    <string name="share">分享</string>
+    <string name="save">下载图片</string>
+
 </resources>

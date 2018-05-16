@@ -11,12 +11,7 @@
         android:id="@+id/Photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/LM"
-        android:layout_marginEnd="@dimen/LM"
-        android:layout_marginLeft="@dimen/LM"
-        android:layout_marginRight="@dimen/LM"
-        android:layout_marginStart="@dimen/LM"
-        android:layout_marginTop="@dimen/LM"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,4 +20,14 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@color/colorAccent"
         tools:ignore="ContentDescription" />
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
 </android.support.constraint.ConstraintLayout>

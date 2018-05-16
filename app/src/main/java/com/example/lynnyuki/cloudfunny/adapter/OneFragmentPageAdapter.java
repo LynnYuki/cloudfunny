@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import com.example.lynnyuki.cloudfunny.fragment.BlankFragment;
 
@@ -19,6 +20,11 @@ public class OneFragmentPageAdapter extends FragmentPagerAdapter {
 
     Fragment myFragment = null;
 
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        //如果注释这行，那么不管怎么切换，page都不会被销毁
+        //super.destroyItem(container, position, object);
+    }
     @Override
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
@@ -46,6 +52,7 @@ public class OneFragmentPageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 3;
     }
+
 
 
 }
