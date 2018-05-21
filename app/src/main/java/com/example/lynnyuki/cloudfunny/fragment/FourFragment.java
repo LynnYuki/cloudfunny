@@ -16,18 +16,28 @@ import com.example.lynnyuki.cloudfunny.fragment.BaseFragment;
 public class FourFragment extends BaseFragment {
 
 
+    @Override
+    protected void initialize() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_four;
+    }
+
     public FourFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_four, container, false);
-    }
-
-    @Override
-    protected void initListener(View view) {
-
-    }
+//    @Override
+//    public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        return inflater.inflate(R.layout.fragment_four, container, false);
+//    }
+//
+//    @Override
+//    protected void initListener(View view) {
+//
+//    }
 
 }

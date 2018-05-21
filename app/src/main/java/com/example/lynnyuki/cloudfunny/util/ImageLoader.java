@@ -15,11 +15,12 @@ public class ImageLoader {
 
     public static void loadDefault(Context context, ImageView imageView) {
         GlideApp.with(context)
-                .load(R.drawable.icon_default)
-                .centerCrop()
-                .placeholder(R.drawable.icon_default)
-                .error(R.drawable.icon_default)
+                .load(R.drawable.ic_empty0)
+                .fitCenter()
+                .placeholder(R.drawable.ic_empty0)
+                .error(R.drawable.ic_empty0)
                 .priority(Priority.LOW)
+                .transition(DrawableTransitionOptions.withCrossFade(1000))
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(imageView);
     }
@@ -27,11 +28,12 @@ public class ImageLoader {
     public static void loadAll(Context context, String imgUrl, ImageView imageView) {
         GlideApp.with(context)
                 .load(imgUrl)
-                .centerCrop()
-                .placeholder(R.drawable.icon_default)
-                .error(R.drawable.icon_default)
+                .fitCenter()
+                .placeholder(R.drawable.ic_empty0)
+                .error(R.drawable.ic_empty0)
                 .priority(Priority.LOW)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .transition(DrawableTransitionOptions.withCrossFade(1000))
                 .into(imageView);
     }
 

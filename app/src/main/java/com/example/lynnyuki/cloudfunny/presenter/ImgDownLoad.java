@@ -1,4 +1,4 @@
-package com.example.lynnyuki.cloudfunny.util;
+package com.example.lynnyuki.cloudfunny.presenter;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,9 +19,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by vimi8 on 2017/6/9.
- */
+
 
 public class ImgDownLoad {
 

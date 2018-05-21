@@ -1,7 +1,5 @@
 package com.example.lynnyuki.cloudfunny.view.Unsplash;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,22 +15,15 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.base.BaseActivity;
-import com.example.lynnyuki.cloudfunny.base.BaseView;
-import com.example.lynnyuki.cloudfunny.config.GlideApp;
-import com.example.lynnyuki.cloudfunny.util.AppFileUtil;
 import com.example.lynnyuki.cloudfunny.util.ImageLoader;
-import com.example.lynnyuki.cloudfunny.util.ImgDownLoad;
-import com.kc.unsplash.Unsplash;
+import com.example.lynnyuki.cloudfunny.presenter.ImgDownLoad;
 import com.kc.unsplash.models.Photo;
-import com.kc.unsplash.models.Urls;
 
 
 import java.util.Objects;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
 
 
 public class ImageActivity extends BaseActivity {
@@ -64,6 +55,11 @@ public class ImageActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         return R.layout.full_photo;
+    }
+
+    @Override
+    protected void initialize() {
+
     }
 
 

@@ -20,10 +20,10 @@ import android.widget.Toast;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.base.BaseActivity;
 import com.example.lynnyuki.cloudfunny.fragment.OneFragment;
-import com.example.lynnyuki.cloudfunny.fragment.TwoFragment;
 import com.example.lynnyuki.cloudfunny.fragment.ThreeFragment;
 import com.example.lynnyuki.cloudfunny.fragment.FourFragment;
 import com.example.lynnyuki.cloudfunny.util.BottomNavigationViewHelper;
+import com.example.lynnyuki.cloudfunny.view.ZhiHu.ZhiHuFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public  class MainActivity extends BaseActivity implements BottomNavigationView.
                     mFragment = new OneFragment();
                     break;
                 case 1:
-                    mFragment = new TwoFragment();
+                    mFragment = new ZhiHuFragment();
                     break;
                 case 2:
                     mFragment = new ThreeFragment();
@@ -141,6 +141,11 @@ public  class MainActivity extends BaseActivity implements BottomNavigationView.
     public int getLayoutId() {
 
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initialize() {
+
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.example.lynnyuki.cloudfunny.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.SupportActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,33 +15,66 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import android.net.NetworkInfo;
+import me.yokeyword.fragmentation.SupportFragment;
 
-public abstract class BaseFragment extends Fragment {
+
+
+public abstract class BaseFragment extends SupportFragment {
     private static final String TAG="BaseFragment";
+
     private Unbinder myBinder;
-    View view;
+
+    protected View mview;
+
+    protected Activity mActivity;
+
+    protected Context  mContext;
+
+    protected abstract void initialize();
+
+    protected abstract int getLayoutId();
+
+    protected boolean isInited = false;
     public BaseFragment(){
 
     }
+
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,
-                             Bundle savedInstanceState){
-        view = initView(inflater,container,savedInstanceState);
-        myBinder = ButterKnife.bind(this,view);
-        initListener(view);
-        return view;
+    public void onAttach(Context context){
+        mActivity = (Activity)context;
+        mContext = context;
+        super.onAttach(context);
+        Log.d(TAG,"onAttach");
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,
+                            @Nullable Bundle savedInstanceState){
+        mview = inflater.inflate(getLayoutId(),null);
+        myBinder = ButterKnife.bind(this,mview);
+//        initListener(mview);
+        return mview;
 
     }
-    protected  abstract void  initListener(View view);
-    protected abstract View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
-        if(myBinder == null){
-            myBinder.unbind();
-        }
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        isInited = true;
+        initialize();
+
+    }
+//    protected  abstract void  initListener(View view);
+//    protected abstract View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+//        if(myBinder == null){
+//            myBinder.unbind();
+//        }
+        myBinder.unbind();
         Log.d(TAG,"销毁");
     }
 
@@ -52,10 +88,12 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-    public void onAattach(Context context){
-        super.onAttach(context);
-        Log.d(TAG,"onAttach");
-    }
+
+
+//    public void onAattach(Context context){
+//        super.onAttach(context);
+//        Log.d(TAG,"onAttach");
+//    }
 
 
 }

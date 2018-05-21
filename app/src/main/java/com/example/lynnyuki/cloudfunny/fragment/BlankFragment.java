@@ -29,6 +29,7 @@ import com.example.lynnyuki.cloudfunny.fragment.BaseFragment;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.util.AppNetWorkUtil;
 import com.example.lynnyuki.cloudfunny.util.LogUtil;
+import com.example.lynnyuki.cloudfunny.util.SnackBarUtils;
 import com.kc.unsplash.Unsplash;
 import com.kc.unsplash.api.Order;
 import com.kc.unsplash.models.Photo;
@@ -41,16 +42,25 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BlankFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener{
+public class BlankFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
+
     private final String CLIENT_ID = "b85ff30608ec972c8b81da4ea49580d0b9dc02653af9882bc7468ce3a4a04957";
+
     private static final String TAG = "BlankFragment";
     MyAdapter myAdapter;
+
     BaseView baseView;
+
     Context context=this.getContext();
+
     Unsplash unsplash = new Unsplash(CLIENT_ID);
+
     private int position = 0;
+
     Random random = new Random();
+
     private  int randomPage = random.nextInt(10);
+    private  int randomPage2 = random.nextInt(10);
 
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -58,6 +68,25 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
     RecyclerView myRecyclerView;
 
 
+    @SuppressLint("ResourceAsColor")
+    @Override
+    protected void initialize() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        myRecyclerView.setLayoutManager(layoutManager);
+
+        ((SimpleItemAnimator)myRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        initPhoto();
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_blank;
+    }
 
     public BlankFragment() {
         // Required empty public constructor
@@ -81,63 +110,6 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
         Log.e(TAG,"创建");
 
     }
-    @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_blank, container, false);
-    }
-
-    @SuppressLint("ResourceAsColor")
-    @Override
-    protected void initListener(View view) {
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        myRecyclerView.setLayoutManager(layoutManager);
-
-        ((SimpleItemAnimator)myRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
-        swipeRefreshLayout.setRefreshing(true);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-
-            int randomPage2 = random.nextInt(10);
-            @Override
-            public void onRefresh() {
-                if(!AppNetWorkUtil.isNetworkConnected(getContext())){
-                    Snackbar.make(swipeRefreshLayout, "当前无网络，无法刷新 %>_<% ",Snackbar.LENGTH_LONG).setAction("去设置网络", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //设置网络链接
-                            Intent intent = new Intent(Settings.ACTION_SETTINGS);
-                            startActivity(intent);
-                        }
-                    }).show();
-//                    Toast.makeText(getContext(),"当前无网络链接，请检查网络设置。",Toast.LENGTH_SHORT).show();
-                        swipeRefreshLayout.setRefreshing(false);
-                }else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-
-                        switch (position) {
-                        case 0:
-                            photos(randomPage2, 15, Order.POPULAR);
-                            break;
-                        case 1:
-                            photos(randomPage2, 15, Order.LATEST);
-                            break;
-                        case 2:
-                            photos(randomPage2, 15, Order.OLDEST);
-                            break;
-                    }
-                }
-            }).start();
-                      }
-            }
-        });
-
-            initPhoto();
-        }
-
 
     /**
      * 初始化数据
@@ -186,18 +158,46 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
     }
 
 @Override
+public void onRefresh() {
+    if(!AppNetWorkUtil.isNetworkConnected(getContext())){
+        Snackbar.make(swipeRefreshLayout, "当前无网络，无法刷新 %>_<% ",Snackbar.LENGTH_LONG).setAction("去设置网络", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //设置网络链接
+                Intent intent = new Intent(Settings.ACTION_SETTINGS);
+                startActivity(intent);
+            }
+        }).show();
+        Toast.makeText(getContext(),"当前无网络链接，请检查网络设置。",Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setRefreshing(false);
+    }else {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                switch (position) {
+                    case 0:
+                        photos(randomPage2, 15, Order.POPULAR);
+                        break;
+                    case 1:
+                        photos(randomPage2, 15, Order.LATEST);
+                        break;
+                    case 2:
+                        photos(randomPage2, 15, Order.OLDEST);
+                        break;
+                }
+            }
+        }).start();
+
+    }
+
+}
+@Override
 public void onLoadMoreRequested() {
 
-    // 防止上拉加载的时候可以下拉刷新
-    swipeRefreshLayout.setEnabled(false);
-}
-
-@Override
-    public void onAattach(Context context){
-        super.onAttach(context);
-        Log.d(TAG,"onAttach");
-}
-
+        // 防止上拉加载的时候可以下拉刷新
+        swipeRefreshLayout.setEnabled(false);
+    }
 @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
@@ -241,6 +241,8 @@ public void onLoadMoreRequested() {
         super.onDetach();
     Log.d(TAG,"onDetach");
 }
+
+
 
 /**
  * TO DO

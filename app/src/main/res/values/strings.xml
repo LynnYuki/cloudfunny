@@ -7,8 +7,11 @@
         <item name="latest">最新美图</item>
         <item name="oldest">精选美图</item>
     </string-array>
-
-
+    <string name="browser">浏览器中打开</string>
+    <string name="copy">复制链接</string>
+    <string name="copy_msg">已经复制链接地址到剪切板！</string>
+    <string name="collection">收藏</string>
+    <string name="yes">确定</string>
     <string name="article">热文</string>
     <string name="picture">美图</string>
     <string name="video">视频</string>

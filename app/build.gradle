@@ -39,8 +39,7 @@ ext {
     butterknifeVersion = '8.8.1'
 }
 dependencies {
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation "com.android.support:design:${supportLibVersion}"
@@ -57,22 +56,24 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:${adapter_rxjavaVersion}"
 
     //OKHttp
-    implementation "com.squareup.okhttp3:okhttp:3.10.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
-//    //高德地图定位
-//    implementation "com.amap.api:location:3.6.1"
+    //    //高德地图定位
+
+    //    implementation "com.amap.api:location:3.6.1"
 
     //GreenDao
-    implementation "org.greenrobot:greendao:3.2.2"
-    implementation "org.greenrobot:greendao-generator:3.2.2"
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'org.greenrobot:greendao-generator:3.2.2'
 
-//    //Jsoup
-//    implementation "org.jsoup:jsoup:1.10.3"
+    //    //Jsoup
+
+    //    implementation "org.jsoup:jsoup:1.10.3"
 
     //Fragmentation
-    implementation "me.yokeyword:fragmentation:1.2.7"
-    implementation "me.yokeyword:fragmentation-swipeback:1.1.6"
+    implementation 'me.yokeyword:fragmentation:1.2.7'
+    implementation 'me.yokeyword:fragmentation-swipeback:1.1.6'
 
     // ButterKnife
     implementation "com.jakewharton:butterknife:${butterknifeVersion}"
@@ -81,18 +82,19 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:${glideVersion}"
     annotationProcessor "com.github.bumptech.glide:compiler:${glideVersion}"
-    
 
     //Dagger2
-    implementation "com.google.dagger:dagger:2.11"
+    implementation 'com.google.dagger:dagger:2.11'
     annotationProcessor "com.google.dagger:dagger-compiler:2.11"
 
     //Unsplash
-    implementation "com.kc.androidunsplash:androidunsplash:0.1.2"
-
+    implementation 'com.kc.androidunsplash:androidunsplash:0.1.2'
+    implementation('com.afollestad.material-dialogs:core:0.9.4.5') {
+        exclude group: 'com.android.support'
+    }
     //JiaoZiVideoPlayer
-    implementation "cn.jzvd:jiaozivideoplayer:6.2.7"
-    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34"
-
-
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.7'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1234_43608_sharewithdownload_withoutGame_obfs_20180510_111111.jar')
+    implementation 'net.danlew:android.joda:2.9.9'
 }
