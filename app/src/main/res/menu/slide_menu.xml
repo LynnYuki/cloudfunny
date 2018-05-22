@@ -4,21 +4,28 @@
     <group android:id="@+id/group1">
         <item
             android:id="@+id/nav_info"
-            android:icon="@drawable/ic_turned_in_not_white_36dp"
+            android:icon="@drawable/ic_notlike"
             android:title="@string/collector"
             app:showAsAction="ifRoom"/>
 
         <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_error_outline_white_36dp"
-            android:title="@string/nightmodel"
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/setting"
             app:showAsAction="ifRoom"/>
 
         <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_settings_white_36dp"
-            android:title="@string/setting"
+            android:id="@+id/nav_person"
+            android:icon="@drawable/ic_person"
+            android:title="@string/person"
             app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_day_night_model"
+            android:title="@string/about"
+            app:showAsAction="ifRoom"/>
+
+
 
     </group>
 
