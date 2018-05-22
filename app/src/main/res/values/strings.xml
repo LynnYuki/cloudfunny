@@ -7,6 +7,8 @@
         <item name="latest">最新美图</item>
         <item name="oldest">精选美图</item>
     </string-array>
+    <string name="kaiyan">开眼视频</string>
+    <string name="zhihu">知乎日报</string>
     <string name="browser">浏览器中打开</string>
     <string name="copy">复制链接</string>
     <string name="copy_msg">已经复制链接地址到剪切板！</string>
@@ -22,7 +24,7 @@
     <string name="no_network">当前网络不可用，请检查网络情况</string>
     <string name="empty">暂无相关数据</string>
     <string name="collector">收藏管理</string>
-    <string name="nightmodel">夜间模式</string>
+    <string name="night_model">夜间模式</string>
     <string name="setting">系统设置</string>
 
     <string name="share">分享</string>

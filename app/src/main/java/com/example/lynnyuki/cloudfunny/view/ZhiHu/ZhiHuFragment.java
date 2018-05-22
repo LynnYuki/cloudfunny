@@ -39,7 +39,6 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
         SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener  {
     private  static  final String TAG = "ZhiHuFragment";
     boolean isOK = false;
-    private  int   newsUrlId;
     private Long date_primary = System.currentTimeMillis();
     private Long TimeMillis = date_primary ;
     private String date  ;
@@ -92,7 +91,7 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
                 Log.e(TAG,"知乎item位置："+newsId);
               if (zhiHuContentBean != null && (Integer.parseInt(zhiHuContentBean.getShare_url().substring(zhiHuContentBean.getShare_url().lastIndexOf("/")+1)) == newsId) && isOK) {
                   WebActivity.open(new WebActivity.Builder()
-                          .setGuid(bean.getGa_prefix())
+                          .setGuid(zhiHuContentBean.getShare_url())
                           .setType(Constants.TYPE_ZhiHu)
                           .setUrl(zhiHuContentBean.getShare_url())
                           .setImgUrl(bean.getImages().get(0))
