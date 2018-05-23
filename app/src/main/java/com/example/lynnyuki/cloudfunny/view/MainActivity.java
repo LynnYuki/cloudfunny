@@ -1,8 +1,11 @@
 package com.example.lynnyuki.cloudfunny.view;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.BottomNavigationView;
@@ -13,35 +16,58 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.base.BaseActivity;
+import com.example.lynnyuki.cloudfunny.base.BaseMVPActivity;
+import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
+import com.example.lynnyuki.cloudfunny.config.Constants;
+import com.example.lynnyuki.cloudfunny.contract.MainContract;
+import com.example.lynnyuki.cloudfunny.dagger.component.DaggerMainActivityComponent;
+import com.example.lynnyuki.cloudfunny.dagger.module.MainActivityModule;
 import com.example.lynnyuki.cloudfunny.fragment.OneFragment;
 import com.example.lynnyuki.cloudfunny.fragment.ThreeFragment;
 import com.example.lynnyuki.cloudfunny.fragment.FourFragment;
+import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
+import com.example.lynnyuki.cloudfunny.presenter.MainPresenter;
+import com.example.lynnyuki.cloudfunny.util.AppExitUtil;
 import com.example.lynnyuki.cloudfunny.util.BottomNavigationViewHelper;
+import com.example.lynnyuki.cloudfunny.view.About.AboutActivity;
 import com.example.lynnyuki.cloudfunny.view.Like.LikeFragment;
+import com.example.lynnyuki.cloudfunny.view.Setting.SettingActivity;
+import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
 import com.example.lynnyuki.cloudfunny.view.ZhiHu.ZhiHuFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public  class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,NavigationView.OnNavigationItemSelectedListener {
+public  class MainActivity extends BaseMVPActivity<MainPresenter> implements MainContract.View,BottomNavigationView.OnNavigationItemSelectedListener,NavigationView.OnNavigationItemSelectedListener {
 
-    List<String> permissionList  = new ArrayList<>();
+    private static final int PERMISSION_CODE = 1000;
     private static final String TAG = "MainActivity";
+
     private LikeFragment likeFragment;
     private OneFragment oneFragment;
     private ZhiHuFragment zhiHuFragment;
     private ThreeFragment threeFragment;
-    private FourFragment fourFragment;
+    private ActionBarDrawerToggle mToggle;
+
+    // 权限获取提示框
+    private MaterialDialog dialog;
+
     @BindView(R.id.slide_menu)
     NavigationView navigationView;
 
@@ -57,101 +83,8 @@ public  class MainActivity extends BaseActivity implements BottomNavigationView.
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-
-    private FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-
-        Fragment mFragment = null;
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    mFragment = oneFragment;
-                    break;
-                case 1:
-                    mFragment = zhiHuFragment;
-                    break;
-                case 2:
-                    mFragment = threeFragment;
-                    break;
-                case 3:
-                    mFragment = fourFragment;
-                    break;
-                case 4:
-                    mFragment = likeFragment;
-            }
-            return mFragment;
-        }
-
-        @Override
-        public int getCount() {
-            return 4;
-        }
-    };
-
-    private ActionBarDrawerToggle mToggle;
-
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 需要theme 设置成 NoActionBar
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        // 关联左上角图标和侧滑菜单
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
-        mToggle.syncState();
-        mDrawerLayout.addDrawerListener(mToggle);
-
-        navigationView.getMenu().getItem(0).setChecked(true);
-        navigationView.setNavigationItemSelectedListener(this);
-        BottomNavigationViewHelper.disableShiftMode(mBottomNav);
-        mBottomNav.setOnNavigationItemSelectedListener(this);
-//        mBottomNav.setSelectedItemId(R.id.nav_one); // 设置首页展示的fragment;
-
-
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
-            permissionList.add(Manifest.permission.READ_PHONE_STATE);
-        }
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            permissionList.add(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS);
-        }
-//        <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"/>
-        //一次性申请所有运行时权限
-        if (!permissionList.isEmpty()){
-            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
-            ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
-        }
-    }
-//    /**
-//     * 权限申请处理
-//     */
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode,  String[] permissions,  int[] grantResults) {
-//        switch (requestCode){
-//            case 1:
-//                if (grantResults.length > 0){
-//                    for (int result:grantResults){
-//                        if (result != PackageManager.PERMISSION_GRANTED){
-//                            Toast.makeText(this, "必须同意所有权限才能使用本程序", Toast.LENGTH_SHORT).show();
-//                            // 如果存在某个权限没有处理
-////                            finish();
-//                            return;
-//                        }
-//                    }
-//                }else{
-//                    // 发生未知错误
-//                    Toast.makeText(this, "权限申请出现未知错误", Toast.LENGTH_SHORT).show();
-//                    //finish();
-//                }
-//                break;
-//            default:
-//        }
-//    }
+    @Inject
+    SharePrefManager sharePrefManager;
 
     @Override
     public int getLayoutId() {
@@ -160,63 +93,179 @@ public  class MainActivity extends BaseActivity implements BottomNavigationView.
     }
 
     @Override
+    protected void initInject() {
+        DaggerMainActivityComponent
+                .builder()
+                .appComponent(CloudFunnyApplication.getAppComponent())
+                .mainActivityModule(new MainActivityModule(this))
+                .build()
+                .inject(this);
+    }
+
+
+
+
+    @Override
     protected void initialize() {
+        // 需要theme 设置成 NoActionBar
+        setSupportActionBar(mToolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
+        // 关联左上角图标和侧滑菜单
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        mToggle.syncState();
+        mDrawerLayout.addDrawerListener(mToggle);
+        BottomNavigationViewHelper.disableShiftMode(mBottomNav);
+        mBottomNav.setOnNavigationItemSelectedListener(this);
+
+        mPresenter.checkPermissions();
+        mPresenter.setDayOrNight();
+        initDialog();
+
+    }
+
+    private  void initFragment(){
+
         likeFragment = new LikeFragment();
         oneFragment =  new OneFragment();
         zhiHuFragment = new ZhiHuFragment();
         threeFragment = new ThreeFragment();
-        fourFragment = new FourFragment();
-        loadMultipleRootFragment(R.id.container, 0, oneFragment,zhiHuFragment,threeFragment,fourFragment,likeFragment);
+        loadMultipleRootFragment(R.id.container, 0, oneFragment,zhiHuFragment,threeFragment,likeFragment);
 
     }
 
+    /**
+     * 获取权限提示框
+     */
+    private void initDialog() {
+        dialog = new MaterialDialog.Builder(mContext)
+                .title(R.string.permission_application)
+                .content(R.string.permission_application_content)
+                .cancelable(false)
+                .positiveText(R.string.setting)
+                .positiveColorRes(R.color.colorPositive)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        intent.setData(Uri.fromParts("package", getPackageName(), null));
+                        startActivityForResult(intent, PERMISSION_CODE);
+                    }
+                })
+                .negativeText(R.string.no)
+                .negativeColorRes(R.color.colorNegative)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        // 不给权限就直接退出
+                        AppExitUtil.exitAPP(mContext);
+                    }
+                })
+                .build();
+    }
+
+    /**
+     * 返回键监听
+     */
+    @Override
+    public void onBackPressedSupport() {
+        AppExitUtil.exitApp(this, mToolbar);
+    }
+
+    /**
+     * 权限获取失败
+     */
+    @Override
+    public void showPermissionDialog() {
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+    }
+
+
+    /**
+     * 权限获取成功后
+     */
+    @Override
+    public void getPermissionSuccess() {
+        initFragment();
+        //设置抽屉菜单Item选中
+//       navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
+
+    /**
+     * 设置夜间模式
+     * @param changed
+     */
+    @Override
+    public void changeDayOrNight(boolean changed) {
+        if (changed) {
+            finish();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PERMISSION_CODE) {
+            mPresenter.checkPermissions();
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment;
-        int index = 0;
+
         switch (item.getItemId()) {
             case R.id.nav_one:
                 Log.e(TAG, "ONE");
                 mToolbar.setTitle("首页");
                 showHideFragment(oneFragment);
-                index = 0;
                 break;
-
             case R.id.nav_two:
                 Log.e(TAG, "TWO");
                 mToolbar.setTitle("热文");
-                index = 1;
                 showHideFragment(zhiHuFragment);
                 break;
-
             case R.id.nav_three:
                 Log.e(TAG, "THREE");
                 mToolbar.setTitle("视频");
                 showHideFragment(threeFragment);
-                index = 2;
                 break;
-
-            case R.id.nav_four:
-                Log.e(TAG, "FOUR");
-                mToolbar.setTitle("我的");
-                showHideFragment(zhiHuFragment);
-                index = 3;
+            case R.id.nav_about:
+                Log.e(TAG,"关于云趣");
+                startActivity(new Intent(mContext, AboutActivity.class));
                 break;
             case R.id.nav_info:
                 Log.e(TAG,"收藏管理");
                 mToolbar.setTitle("我的收藏");
                 showHideFragment(likeFragment);
                 break;
+            case R.id.nav_person:
+                Log.e(TAG,"个人主页");
+                WebActivity.open(new WebActivity.Builder()
+                    .setGuid("")
+                    .setImgUrl("")
+                    .setType(Constants.TYPE_DEFAULT)
+                    .setUrl("https://github.com/LynnYuki")
+                    .setTitle("个人主页")
+                    .setShowLikeIcon(false)
+                    .setContext(mContext));
+                break;
+            case R.id.nav_setting:
+                Log.e(TAG,"系统设置");
+                startActivity(new Intent(mContext, SettingActivity.class));
+                break;
         }
         mDrawerLayout.closeDrawers();
-//        // 判断是否持有过这个fragment 有直接返回，没有则创建
-//        // 该方法会调用setMenuVisibility 显示和隐藏
-//        fragment = (Fragment) mAdapter.instantiateItem(mContainer, index);
-//        // 设置为当前的fragment  第二个参数没什么意义？？
-//        mAdapter.setPrimaryItem(mContainer, 0, fragment);
-//        // 提交更新
-//        mAdapter.finishUpdate(mContainer);
+
         return true;
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
     }
 }

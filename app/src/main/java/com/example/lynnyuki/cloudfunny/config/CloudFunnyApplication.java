@@ -40,7 +40,6 @@ public class CloudFunnyApplication extends Application {
         AppCompatDelegate.setDefaultNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
         sharePrefManager.setLocalMode(AppCompatDelegate.getDefaultNightMode());
-        sharePrefManager.setLocalProvincialTrafficPatterns(sharePrefManager.getProvincialTrafficPattern());
 
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
         QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {

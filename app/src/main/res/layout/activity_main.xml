@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.lynnyuki.cloudfunny.view.MainActivity"
+    tools:openDrawer="start"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
         >
 
@@ -29,7 +33,6 @@
             android:focusable="true"
             android:gravity="bottom"
             app:elevation="8dp"
-            app:itemBackground="@android:color/white"
             app:itemIconTint="@drawable/nav_item_color_selector"
             app:itemTextColor="@drawable/nav_item_color_selector"
             app:menu="@menu/bottom_navigation"/>
@@ -43,11 +46,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:layout_marginTop="?actionBarSize"
-        android:backgroundTint="@android:color/white"
         app:headerLayout="@layout/head_layout_slide_menu"
-        app:itemBackground="@android:color/white"
+        app:itemIconTint="@animator/nav_menu_icon_color"
+        app:itemTextColor="@animator/nav_menu_text_color"
         app:menu="@menu/slide_menu">
     </android.support.design.widget.NavigationView>
-
+    <!--android:layout_marginTop="?actionBarSize"-->
+    <!--android:backgroundTint="@android:color/white"-->
+    <!--app:itemBackground="@android:color/white"-->
 </android.support.v4.widget.DrawerLayout>

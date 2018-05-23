@@ -20,24 +20,6 @@ public class SharePrefManager {
         SPfres = context.getSharedPreferences(SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
-    /**
-     * 设置省流量模式
-     */
-    public void setProvincialTrafficPatterns(boolean event) {
-        SPfres.edit().putBoolean("provincial_traffic_patterns", event).commit();
-    }
-
-    public boolean getProvincialTrafficPattern() {
-        return SPfres.getBoolean("provincial_traffic_patterns", false);
-    }
-
-    public void setLocalProvincialTrafficPatterns(boolean event){
-        SPfres.edit().putBoolean("local_provincial_traffic_patterns", event).commit();
-    }
-
-    public boolean getLocalProvincialTrafficPatterns(){
-        return SPfres.getBoolean("local_provincial_traffic_patterns", false);
-    }
 
     /**
      * 设置夜间模式
@@ -45,7 +27,7 @@ public class SharePrefManager {
      * @param event
      */
     public void setNightMode(boolean event) {
-        SPfres.edit().putBoolean("nightmode", event).commit();
+        SPfres.edit().putBoolean("nightmode", event).apply();
     }
 
     public boolean getNightMode() {
@@ -53,7 +35,7 @@ public class SharePrefManager {
     }
 
     public void setLocalMode(int localMode){
-        SPfres.edit().putInt("localMode", localMode).commit();
+        SPfres.edit().putInt("localMode", localMode).apply();
     }
 
     public int getLocalMode(){

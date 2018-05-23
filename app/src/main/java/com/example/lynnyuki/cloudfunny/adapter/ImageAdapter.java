@@ -1,14 +1,11 @@
 package com.example.lynnyuki.cloudfunny.adapter;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -21,11 +18,11 @@ import com.example.lynnyuki.cloudfunny.view.Unsplash.ImageActivity;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>implements View.OnClickListener{
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>implements View.OnClickListener{
     private List<Photo> photoList;
     private Context mContext;
 
-    public MyAdapter(List<Photo> photos,Context context) {
+    public ImageAdapter(List<Photo> photos, Context context) {
         photoList = photos;
         mContext = context;
 
@@ -54,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
                 .load(photo.getUrls().getRegular())
                 .priority(Priority.LOW)
                 .fitCenter()
-                .error(R.drawable.ic_empty)
+                .error(R.drawable.ic_empty0)
                 .transition(DrawableTransitionOptions.withCrossFade(1000))
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(holder.imageView);

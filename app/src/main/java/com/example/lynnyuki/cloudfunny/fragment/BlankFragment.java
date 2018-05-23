@@ -5,35 +5,27 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.lynnyuki.cloudfunny.adapter.MyAdapter;
+import com.example.lynnyuki.cloudfunny.adapter.ImageAdapter;
 import com.example.lynnyuki.cloudfunny.base.BaseView;
-import com.example.lynnyuki.cloudfunny.fragment.BaseFragment;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.util.AppNetWorkUtil;
-import com.example.lynnyuki.cloudfunny.util.LogUtil;
-import com.example.lynnyuki.cloudfunny.util.SnackBarUtils;
 import com.kc.unsplash.Unsplash;
 import com.kc.unsplash.api.Order;
 import com.kc.unsplash.models.Photo;
-import java.lang.Math;
+
 import java.util.Random;
 import java.util.List;
 
@@ -47,7 +39,7 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
     private final String CLIENT_ID = "b85ff30608ec972c8b81da4ea49580d0b9dc02653af9882bc7468ce3a4a04957";
 
     private static final String TAG = "BlankFragment";
-    MyAdapter myAdapter;
+    ImageAdapter myAdapter;
 
     BaseView baseView;
 
@@ -59,8 +51,8 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
 
     Random random = new Random();
 
-    private  int randomPage = random.nextInt(10);
-    private  int randomPage2 = random.nextInt(10);
+    private  int randomPage = random.nextInt(50);
+
 
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -117,13 +109,13 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
     public void initPhoto(){
         switch (position) {
             case 0:
-                photos(randomPage, 15, Order.POPULAR);
+                photos(randomPage, 30, Order.POPULAR);
                 break;
             case 1:
-                photos(randomPage, 15, Order.LATEST);
+                photos(randomPage, 30, Order.LATEST);
                 break;
             case 2:
-                photos(randomPage, 15, Order.OLDEST);
+                photos(randomPage, 30, Order.OLDEST);
                 break;
         }
     }
@@ -139,7 +131,7 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
                 @Override
                 public void onComplete(List<Photo> photos) {
                     if (myAdapter == null) {
-                        myAdapter = new MyAdapter(photos, getActivity());
+                        myAdapter = new ImageAdapter(photos, getActivity());
                         myRecyclerView.setAdapter(myAdapter);
                     } else {
                         myAdapter.updateList(photos);
@@ -159,6 +151,7 @@ public class BlankFragment extends BaseFragment implements BaseQuickAdapter.Requ
 
 @Override
 public void onRefresh() {
+    final int randomPage2 = random.nextInt(50);
     if(!AppNetWorkUtil.isNetworkConnected(getContext())){
         Snackbar.make(swipeRefreshLayout, "当前无网络，无法刷新 %>_<% ",Snackbar.LENGTH_LONG).setAction("去设置网络", new View.OnClickListener() {
             @Override
@@ -171,19 +164,20 @@ public void onRefresh() {
         Toast.makeText(getContext(),"当前无网络链接，请检查网络设置。",Toast.LENGTH_SHORT).show();
         swipeRefreshLayout.setRefreshing(false);
     }else {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 switch (position) {
                     case 0:
-                        photos(randomPage2, 15, Order.POPULAR);
+                        photos(randomPage2, 30, Order.POPULAR);
                         break;
                     case 1:
-                        photos(randomPage2, 15, Order.LATEST);
+                        photos(randomPage2, 30, Order.LATEST);
                         break;
                     case 2:
-                        photos(randomPage2, 15, Order.OLDEST);
+                        photos(randomPage2, 30, Order.OLDEST);
                         break;
                 }
             }

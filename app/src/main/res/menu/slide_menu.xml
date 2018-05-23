@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <group android:id="@+id/group1">
+    <group android:id="@+id/group1"
+        android:checkableBehavior="all">
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_notlike"
@@ -9,15 +10,14 @@
             app:showAsAction="ifRoom"/>
 
         <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_setting"
-            android:title="@string/setting"
-            app:showAsAction="ifRoom"/>
-
-        <item
             android:id="@+id/nav_person"
             android:icon="@drawable/ic_person"
             android:title="@string/person"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/setting"
             app:showAsAction="ifRoom"/>
         <item
             android:id="@+id/nav_about"

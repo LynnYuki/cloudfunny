@@ -19,9 +19,17 @@
             android:summary="V 1.0"
             android:title="当前版本" />
         <Preference
-            android:key="@string/key_homepage"
-            android:summary="https://github.com/LynnYuki"
-            android:title="个人主页" />
+            android:key="@string/key_appName"
+            android:summary="云趣(CloudFunny)"
+            android:title="应用名称" />
+        <Preference
+            android:key="@string/key_project_programmer"
+            android:summary="LynnYuki"
+            android:title="应用作者" />
+        <Preference
+            android:key="@string/key_project_page"
+            android:summary="https://github.com/LynnYuki/cloudfunny"
+            android:title="项目主页" />
     </PreferenceCategory>
 
 </PreferenceScreen>

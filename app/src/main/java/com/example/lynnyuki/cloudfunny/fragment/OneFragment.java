@@ -54,23 +54,7 @@ public class OneFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-//    @Override
-//    public View initView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-//        return inflater.inflate(R.layout.fragment_one,container,false);
-//
-//
-//    }
-//
-//    @Override
-//    protected  void initListener(View view){
-//
-//
-//    }
-//    @Override
-//    public void onAattach(Context context){
-//        super.onAttach(context);
-//        Log.d(TAG,"onAttach");
-//    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){

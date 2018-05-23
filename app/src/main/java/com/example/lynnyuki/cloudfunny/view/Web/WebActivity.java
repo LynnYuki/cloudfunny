@@ -207,7 +207,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                     swipeRefreshLayout.setEnabled(true);
                 }
                 //webView不是顶部
-                else {
+                else{
                     swipeRefreshLayout.setEnabled(false);
                 }
             }
