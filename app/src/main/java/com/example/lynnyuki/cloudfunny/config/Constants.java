@@ -8,5 +8,8 @@ public class Constants {
     public static final int TYPE_DEFAULT = 0;
     public static final int TYPE_ZhiHu = 1;
     public static final int TYPE_KaiYan = 2;
+    public static final int TYPE_VIDEO = 3;
+    // 开眼视频pdid
+    public static final String EYEPETIZER_UDID = "79a95dc6b649489383e976b5b97d129f6d592fad";
 
 }

@@ -2,16 +2,12 @@ package com.example.lynnyuki.cloudfunny.base;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.MenuItem;
 
-
 import com.example.lynnyuki.cloudfunny.util.AppActivityTaskManager;
-import com.kc.unsplash.Unsplash;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -54,7 +50,7 @@ public abstract class BaseActivity extends SupportActivity {
     @Override
     protected  void onDestroy(){
         super.onDestroy();
-//        myUnbinder.unbind();
+        myUnbinder.unbind();
         Log.d(TAG,"销毁");
         AppActivityTaskManager.getInstance().removeActivity(this);
     }

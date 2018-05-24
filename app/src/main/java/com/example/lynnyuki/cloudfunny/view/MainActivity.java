@@ -1,32 +1,21 @@
 package com.example.lynnyuki.cloudfunny.view;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lynnyuki.cloudfunny.R;
-import com.example.lynnyuki.cloudfunny.base.BaseActivity;
 import com.example.lynnyuki.cloudfunny.base.BaseMVPActivity;
 import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
 import com.example.lynnyuki.cloudfunny.config.Constants;
@@ -34,20 +23,17 @@ import com.example.lynnyuki.cloudfunny.contract.MainContract;
 import com.example.lynnyuki.cloudfunny.dagger.component.DaggerMainActivityComponent;
 import com.example.lynnyuki.cloudfunny.dagger.module.MainActivityModule;
 import com.example.lynnyuki.cloudfunny.fragment.OneFragment;
-import com.example.lynnyuki.cloudfunny.fragment.ThreeFragment;
-import com.example.lynnyuki.cloudfunny.fragment.FourFragment;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 import com.example.lynnyuki.cloudfunny.presenter.MainPresenter;
 import com.example.lynnyuki.cloudfunny.util.AppExitUtil;
 import com.example.lynnyuki.cloudfunny.util.BottomNavigationViewHelper;
 import com.example.lynnyuki.cloudfunny.view.About.AboutActivity;
+import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerFragment;
 import com.example.lynnyuki.cloudfunny.view.Like.LikeFragment;
 import com.example.lynnyuki.cloudfunny.view.Setting.SettingActivity;
 import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
 import com.example.lynnyuki.cloudfunny.view.ZhiHu.ZhiHuFragment;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -62,7 +48,7 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     private LikeFragment likeFragment;
     private OneFragment oneFragment;
     private ZhiHuFragment zhiHuFragment;
-    private ThreeFragment threeFragment;
+    private EyepetizerFragment eyepetizerFragment;
     private ActionBarDrawerToggle mToggle;
 
     // 权限获取提示框
@@ -128,8 +114,8 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
         likeFragment = new LikeFragment();
         oneFragment =  new OneFragment();
         zhiHuFragment = new ZhiHuFragment();
-        threeFragment = new ThreeFragment();
-        loadMultipleRootFragment(R.id.container, 0, oneFragment,zhiHuFragment,threeFragment,likeFragment);
+        eyepetizerFragment = new EyepetizerFragment();
+        loadMultipleRootFragment(R.id.container, 0, oneFragment,zhiHuFragment,eyepetizerFragment,likeFragment);
 
     }
 
@@ -232,8 +218,8 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
                 break;
             case R.id.nav_three:
                 Log.e(TAG, "THREE");
-                mToolbar.setTitle("视频");
-                showHideFragment(threeFragment);
+                mToolbar.setTitle("开眼视频");
+                showHideFragment(eyepetizerFragment);
                 break;
             case R.id.nav_about:
                 Log.e(TAG,"关于云趣");

@@ -22,7 +22,8 @@
     <string name="drawer_close">关闭</string>
     <string name="no_network">当前网络不可用，请检查网络情况</string>
     <string name="empty">请检查网络连接</string>
-    <string name="collector">收藏管理</string>
+    <string name="view_empty">暂无相关数据</string>
+    <string name="collector">我的收藏</string>
     <string name="about">关于云趣</string>
     <string name="night_model">夜间模式</string>
     <string name="setting">系统设置</string>

@@ -24,8 +24,6 @@ public class LikeAdapter extends BaseQuickAdapter<LikeBean, BaseViewHolder> {
         helper.setText(R.id.txt_like_title, item.getTitle());
         if (item.getType() == Constants.TYPE_ZhiHu) {
             helper.setText(R.id.txt_like_type, R.string.zhihu);
-//        } else if (item.getType() == Constants.TYPE_GANK) {
-//            helper.setText(R.id.txt_like_type, R.string.gank);
         } else if (item.getType() == Constants.TYPE_KaiYan) {
             helper.setText(R.id.txt_like_type, R.string.kaiyan);
         }
