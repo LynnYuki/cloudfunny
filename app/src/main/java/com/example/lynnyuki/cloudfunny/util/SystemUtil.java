@@ -7,7 +7,7 @@ import java.io.File;
 import java.math.BigDecimal;
 
 /**
- * 系统工具
+ * 系统工具类
  */
 
 public class SystemUtil {

@@ -7,6 +7,9 @@ import com.example.lynnyuki.cloudfunny.model.bean.VideoBean;
 import com.example.lynnyuki.cloudfunny.util.ImageLoader;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+/**
+ * 视频标签适配器
+ */
 public class EyepetizerTagAdapter extends BaseQuickAdapter<VideoBean.ItemListBean.DataBeanX.ContentBean.DataBean.TagBean, BaseViewHolder> {
 
     public EyepetizerTagAdapter() {

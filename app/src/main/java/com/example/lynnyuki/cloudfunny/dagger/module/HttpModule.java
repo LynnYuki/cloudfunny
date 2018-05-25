@@ -23,6 +23,9 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
+/**
+ * 网络请求模块
+ */
 @Module
 public class HttpModule {
 

@@ -10,7 +10,7 @@ import com.example.lynnyuki.cloudfunny.R;
 
 
 /**
- * Created by xiarh on 2017/10/13.
+ * 消息弹出工具类
  */
 
 public class SnackBarUtils {

@@ -32,8 +32,8 @@ import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 
 /**
- * 详细视频信息
- * Created by xiarh on 2018/2/9.
+ * 视频播放界面
+ *
  */
 
 public class EyepetizerDetailActivity extends BaseActivity {

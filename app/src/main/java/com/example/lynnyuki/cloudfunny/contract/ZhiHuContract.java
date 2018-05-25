@@ -5,6 +5,9 @@ import com.example.lynnyuki.cloudfunny.base.BaseView;
 import com.example.lynnyuki.cloudfunny.model.bean.ZhiHuBean;
 import com.example.lynnyuki.cloudfunny.model.bean.ZhiHuContentBean;
 
+/**
+ * 知乎 Contract
+ */
 
 public interface ZhiHuContract {
 

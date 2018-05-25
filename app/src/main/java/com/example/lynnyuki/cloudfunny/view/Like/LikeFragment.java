@@ -29,7 +29,7 @@ import cn.jzvd.JZVideoPlayerStandard;
 
 /**
  * 我的收藏
- * Created by xiarh on 2017/11/23.
+ *
  */
 
 public class LikeFragment extends BaseFragment {
@@ -112,7 +112,7 @@ public class LikeFragment extends BaseFragment {
             likeAdapter.setNewData(daoManager.queryAll());
         }
         if (null != sharePrefManager && null != likeAdapter) {
-//            likeAdapter.setPTP(sharePrefManager.getProvincialTrafficPattern());
+
             likeAdapter.notifyDataSetChanged();
         }
     }

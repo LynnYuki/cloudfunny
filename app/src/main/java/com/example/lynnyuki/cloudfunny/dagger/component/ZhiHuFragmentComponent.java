@@ -5,6 +5,9 @@ import com.example.lynnyuki.cloudfunny.dagger.scope.FragmentScope;
 import com.example.lynnyuki.cloudfunny.view.ZhiHu.ZhiHuFragment;
 import dagger.Component;
 
+/**
+ * 知乎组件
+ */
 @FragmentScope
 @Component(dependencies = AppComponent.class,
             modules = ZhiHuFragmentModule.class)

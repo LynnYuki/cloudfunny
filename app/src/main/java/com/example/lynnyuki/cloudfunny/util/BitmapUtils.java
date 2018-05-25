@@ -5,6 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import java.io.InputStream;
 
+/**
+ * Bitmap图片处理工具类
+ */
 public class BitmapUtils {
     public  static Bitmap  readBitMap(Context context,int resId){
         BitmapFactory.Options opt = new  BitmapFactory.Options();

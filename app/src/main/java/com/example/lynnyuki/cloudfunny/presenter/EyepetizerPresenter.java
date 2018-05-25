@@ -2,7 +2,6 @@ package com.example.lynnyuki.cloudfunny.presenter;
 import android.content.Context;
 
 import com.example.lynnyuki.cloudfunny.base.BaseSubscriber;
-import com.example.lynnyuki.cloudfunny.base.RxBus;
 import com.example.lynnyuki.cloudfunny.base.RxPresenter;
 import com.example.lynnyuki.cloudfunny.contract.EyepetizerContract;
 import com.example.lynnyuki.cloudfunny.model.bean.VideoBean;
@@ -12,13 +11,14 @@ import org.reactivestreams.Publisher;
 
 import javax.inject.Inject;
 
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by xiarh on 2018/2/7.
+ * 开眼视频Presenter
  */
 
 public class EyepetizerPresenter extends RxPresenter<EyepetizerContract.View> implements EyepetizerContract.Presenter {
@@ -51,6 +51,7 @@ public class EyepetizerPresenter extends RxPresenter<EyepetizerContract.View> im
                     }
                 }));
     }
+
 
     @Override
     public void getVideoData(final int page, final String udid, String strategy, String vc, String deviceModel) {
@@ -91,18 +92,5 @@ public class EyepetizerPresenter extends RxPresenter<EyepetizerContract.View> im
                 }));
     }
 
-    @Override
-    public void getPTP() {
-        addSubscribe(RxBus.getInstance().register(Integer.class)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseSubscriber<Integer>(context, mView) {
-                    @Override
-                    public void onNext(Integer integer) {
-                        if (integer == 1001) {
-                            mView.refreshAdapter(true);
-                        }
-                    }
-                }));
-    }
+
 }

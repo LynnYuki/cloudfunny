@@ -13,6 +13,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
 
+/**
+ * Activity基类
+ */
 public abstract class BaseActivity extends SupportActivity {
     protected Activity mContext;
 

@@ -19,7 +19,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+/**
+ * 图片下载类
+ */
 
 public class ImgDownLoad {
 

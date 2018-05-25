@@ -6,7 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 
 import javax.inject.Scope;
 
-
+/**
+ * Activity 作用域
+ */
 
 @Scope
 @Documented

@@ -8,8 +8,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * APP应用退出(按两次)
- * Created by xiarh on 2017/9/13.
+ * APP应用退出(按两次)工具类
+ *
  */
 
 public class AppExitUtil {

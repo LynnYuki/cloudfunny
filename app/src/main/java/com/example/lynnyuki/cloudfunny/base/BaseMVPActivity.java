@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 /**
  * 带MVP和Dagger2的Activity基类
- * Created by xiarh on 2017/9/22.
+ *
  */
 
 public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActivity implements BaseView {

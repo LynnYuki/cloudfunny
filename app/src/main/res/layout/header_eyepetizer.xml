@@ -8,11 +8,11 @@
         android:id="@+id/txt_hot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:text="近期热门"
+        android:text="@string/hot"
         android:textColor="@color/colorTxt"
-        android:textSize="23dp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="gone" />
 
@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
         android:layout_marginTop="8dp"
-        android:gravity="center_vertical|right"
+        android:gravity="center_vertical|end"
         android:orientation="horizontal"
         android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="更多热门推荐"
+            android:text="@string/hot_more"
             android:textColor="@color/colorTxt"
             android:textSize="13sp"
             android:textStyle="bold" />
@@ -51,11 +51,11 @@
         android:id="@+id/txt_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
+        android:layout_marginStart="3dp"
         android:layout_marginTop="10dp"
-        android:text="你可能会喜欢"
+        android:text="@string/may_like"
         android:textColor="@color/colorTxt"
-        android:textSize="23dp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="gone" />
 

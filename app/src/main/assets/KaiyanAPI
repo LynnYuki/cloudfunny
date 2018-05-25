@@ -21,7 +21,7 @@ tabs_item : http://baobab.kaiyanapp.com/api/v3/pgc/videos?pgcId=56&strategy=date
 /**
  * strategy : monthly, weekly, historical
  */
-hots : http://baobab.kaiyanapp.com/api/v3/ranklist?num=10&strategy=monthly
+hots :
 
 //http://baobab.kaiyanapp.com/api/v3/tag/videos?tagId=24&strategy=shareCount
 

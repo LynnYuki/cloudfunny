@@ -19,7 +19,7 @@ import com.example.lynnyuki.cloudfunny.util.SystemUtil;
 import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
 
 /**
- * 设置
+ * 设置Fragment
  */
 
 public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {

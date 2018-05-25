@@ -6,8 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import com.example.lynnyuki.cloudfunny.fragment.BlankFragment;
+import com.example.lynnyuki.cloudfunny.fragment.ImageFragment;
 
+/**
+ * 图片加载ViewPager适配器
+ */
 public class OneFragmentPageAdapter extends FragmentPagerAdapter {
 
     private String[] myTitles;
@@ -28,16 +31,16 @@ public class OneFragmentPageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
-        bundle.putInt(BlankFragment.KEY_ARG_POSITION, position);
+        bundle.putInt(ImageFragment.KEY_ARG_POSITION, position);
         switch (position) {
             case 0:
-                myFragment = BlankFragment.newInstance(bundle);
+                myFragment = ImageFragment.newInstance(bundle);
                 break;
             case 1:
-                myFragment = BlankFragment.newInstance(bundle);
+                myFragment = ImageFragment.newInstance(bundle);
                 break;
             case 2:
-                myFragment = BlankFragment.newInstance(bundle);
+                myFragment = ImageFragment.newInstance(bundle);
                 break;
         }
         return myFragment;

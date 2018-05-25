@@ -29,6 +29,7 @@ import com.example.lynnyuki.cloudfunny.util.AppExitUtil;
 import com.example.lynnyuki.cloudfunny.util.BottomNavigationViewHelper;
 import com.example.lynnyuki.cloudfunny.view.About.AboutActivity;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerFragment;
+import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerHotFragment;
 import com.example.lynnyuki.cloudfunny.view.Like.LikeFragment;
 import com.example.lynnyuki.cloudfunny.view.Setting.SettingActivity;
 import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
@@ -50,6 +51,7 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     private ZhiHuFragment zhiHuFragment;
     private EyepetizerFragment eyepetizerFragment;
     private ActionBarDrawerToggle mToggle;
+    private EyepetizerHotFragment eyepetizerHotFragment;
 
     // 权限获取提示框
     private MaterialDialog dialog;
@@ -115,7 +117,8 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
         oneFragment =  new OneFragment();
         zhiHuFragment = new ZhiHuFragment();
         eyepetizerFragment = new EyepetizerFragment();
-        loadMultipleRootFragment(R.id.container, 0, oneFragment,zhiHuFragment,eyepetizerFragment,likeFragment);
+        eyepetizerHotFragment = new EyepetizerHotFragment();
+        loadMultipleRootFragment(R.id.container, 0, oneFragment,zhiHuFragment,eyepetizerFragment,likeFragment,eyepetizerHotFragment);
 
     }
 

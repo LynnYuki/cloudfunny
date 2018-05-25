@@ -2,7 +2,9 @@ package com.example.lynnyuki.cloudfunny.util;
 
 import org.joda.time.DateTime;
 
-
+/**
+ * 时间处理工具类
+ */
 public class Time {
     /**
      * 解析API传回的时间 XXXX-XX-XX 的字符串, 转换为中文指代的时间, 比如 "今天 02/09"

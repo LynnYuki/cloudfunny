@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Qualifier;
 
 /**
- * Created by xiarh on 2018/2/7.
+ * 开眼视频URL
  */
 
 @Qualifier

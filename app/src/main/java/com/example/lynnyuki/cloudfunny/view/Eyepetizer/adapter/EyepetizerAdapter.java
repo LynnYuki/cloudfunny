@@ -11,7 +11,9 @@ import com.example.lynnyuki.cloudfunny.util.ImageLoader;
 import com.example.lynnyuki.cloudfunny.util.SystemUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-
+/**
+ * 每日视频适配器
+ */
 
 public class EyepetizerAdapter extends BaseQuickAdapter<VideoBean.ItemListBean, BaseViewHolder> {
 
@@ -21,6 +23,7 @@ public class EyepetizerAdapter extends BaseQuickAdapter<VideoBean.ItemListBean, 
 
     @Override
     protected void convert(BaseViewHolder helper, VideoBean.ItemListBean item) {
+
         helper.setText(R.id.txt_video_duration, SystemUtil.second2Minute(item.getData().getContent().getData().getDuration()));
         helper.setText(R.id.txt_video_title, item.getData().getContent().getData().getTitle());
         helper.setText(R.id.txt_video_content, item.getData().getHeader().getTitle() + " / "

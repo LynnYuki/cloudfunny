@@ -77,8 +77,7 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
         swipeRefreshLayout.setOnRefreshListener(this);
         mPresenter.getZhiHuData();
         Log.e(TAG,"时间"+DateUtil.LongString(TimeMillis));
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
+
         zhiHuAdapter = new ZhiHuAdapter();
         recyclerView.setAdapter(zhiHuAdapter);
         zhiHuAdapter.setOnLoadMoreListener(this,recyclerView);
@@ -191,17 +190,7 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
     }
 
 
-//    @Override
-//    public void showZhiHuContent(@Nullable ZhiHuContentBean zhiHuContentBean) {
-//        this.zhiHuContentBean = zhiHuContentBean;
-//        }
 
-//
-//    @Override
-//    public void showZhiHuContent(@Nullable ZhiHuBean zhiHuBean) {
-//
-//    }
-//
 ///**
 // * webwiew网页处理
 // * @return

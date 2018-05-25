@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * 时间转化工具类
- * Created by xiarh on 2017/9/14.
+ *
  */
 
 public class DateUtil {

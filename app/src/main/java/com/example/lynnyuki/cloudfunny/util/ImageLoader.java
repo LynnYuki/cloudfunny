@@ -9,7 +9,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.config.GlideApp;
 
-
+/**
+ * Glide图片加载工具封装
+ */
 
 public class ImageLoader {
 

@@ -5,7 +5,7 @@ import com.example.lynnyuki.cloudfunny.base.BaseView;
 import com.example.lynnyuki.cloudfunny.model.bean.VideoBean;
 
 /**
- * Created by xiarh on 2018/2/7.
+ * 视频Contract
  */
 
 public interface EyepetizerContract {
@@ -35,16 +35,12 @@ public interface EyepetizerContract {
          */
         void failGetHotData();
 
-        /**
-         * 刷新Adapter
-         */
-        void refreshAdapter(boolean isRefresh);
     }
 
     interface Presenter extends BasePresenter<View> {
 
         /**
-         * 获取视频
+         * 获取热门和每日视频
          *
          * @param page
          * @param udid
@@ -52,16 +48,12 @@ public interface EyepetizerContract {
         void getVideoData(int page, String udid, String strategy, String vc, String deviceModel);
 
         /**
-         * 获取视频
+         * 获取每日视频
          *
          * @param page
          * @param udid
          */
         void getDailyVideoData(int page, String udid);
 
-        /**
-         * 省流量模式
-         */
-        void getPTP();
     }
 }

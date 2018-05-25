@@ -12,7 +12,7 @@ import retrofit2.http.Path;
 
 
 /**
- * 知乎日报
+ * 知乎日报API
  */
 
 public interface ZhiHuApi {

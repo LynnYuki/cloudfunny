@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Created by xiarh on 2018/2/7.
+ * 开眼视频API
  */
 
 public interface EyepetizerApi {
@@ -18,7 +18,6 @@ public interface EyepetizerApi {
      * 日常视频
      *
      * @param page
-     * @param udid
      * @return
      */
     @GET("api/v5/index/tab/allRec")
@@ -32,4 +31,8 @@ public interface EyepetizerApi {
      */
     @GET("api/v4/rankList/videos")
     Flowable<VideoBean> getHotVideo(@Query("strategy") String strategy, @Query("vc") String vc, @Query("deviceModel") String deviceModel);
+
+
+
 }
+

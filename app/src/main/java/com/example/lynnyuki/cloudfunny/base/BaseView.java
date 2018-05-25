@@ -1,5 +1,8 @@
 package com.example.lynnyuki.cloudfunny.base;
 
+/**
+ * View基接口
+ */
 public interface BaseView {
 
     void showMsg(CharSequence msg);

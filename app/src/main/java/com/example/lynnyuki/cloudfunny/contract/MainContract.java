@@ -5,7 +5,7 @@ import com.example.lynnyuki.cloudfunny.base.BaseView;
 
 
 /**
- * Created by xiarh on 2017/9/25.
+ * Main Activity Contract
  */
 
 public interface MainContract {

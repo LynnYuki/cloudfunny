@@ -39,7 +39,7 @@ import com.example.lynnyuki.cloudfunny.widget.X5WebView;
 import butterknife.BindView;
 
 /**
- * Created by xiarh on 2017/11/7.
+ * WebView Activity
  */
 
 public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {

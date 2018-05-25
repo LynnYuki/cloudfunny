@@ -18,7 +18,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by xiarh on 2017/9/25.
+ * Main Activity Presenter
  */
 
 public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {

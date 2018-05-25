@@ -12,7 +12,9 @@ import com.example.lynnyuki.cloudfunny.util.DateUtil;
 import com.example.lynnyuki.cloudfunny.util.ImageLoader;
 
 
-
+/**
+ * 收藏管理适配器
+ */
 public class LikeAdapter extends BaseQuickAdapter<LikeBean, BaseViewHolder> {
 
     public LikeAdapter() {

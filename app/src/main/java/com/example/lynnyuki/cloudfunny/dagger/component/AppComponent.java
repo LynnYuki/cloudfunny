@@ -14,9 +14,8 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
- * Created by xiarh on 2017/9/21.
+ * APP 全局组件
  */
-
 @Singleton
 @Component(modules = {ApplicationModule.class, HttpModule.class})
 public interface AppComponent {

@@ -15,6 +15,9 @@ import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 关于Activity
+ */
 public class AboutActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)

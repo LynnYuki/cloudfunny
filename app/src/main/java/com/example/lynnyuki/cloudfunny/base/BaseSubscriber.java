@@ -18,7 +18,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<T> {
 
     private BaseView view;
 
-    public BaseSubscriber(Context context, BaseView view) {
+    protected BaseSubscriber(Context context, BaseView view) {
         this.context = context;
         this.view = view;
     }
@@ -29,7 +29,6 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<T> {
         if (!AppNetWorkUtil.isNetworkConnected(context)) {
             view.showError(context.getString(R.string.no_network));
             onComplete();
-            return;
         }
     }
 

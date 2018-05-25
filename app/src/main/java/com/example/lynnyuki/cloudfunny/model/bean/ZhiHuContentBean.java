@@ -2,6 +2,9 @@ package com.example.lynnyuki.cloudfunny.model.bean;
 
 import java.util.List;
 
+/**
+ * 知乎具体内容实体Bean
+ */
 public class ZhiHuContentBean {
         /**
          * id : 7053854

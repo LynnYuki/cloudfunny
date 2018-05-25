@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by xiarh on 2018/2/6.
+ * 视频实体Bean
  */
 
 public class VideoBean implements Serializable {

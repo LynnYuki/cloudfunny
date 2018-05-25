@@ -7,6 +7,12 @@
         <item name="latest">最新美图</item>
         <item name="oldest">精选美图</item>
     </string-array>
+
+    <string-array name="hot_tittles">
+        <item name="weekly">周</item>
+        <item name="monthly">月</item>
+        <item name="historical">总</item>
+    </string-array>
     <string name="kaiyan">开眼视频</string>
     <string name="zhihu">知乎日报</string>
     <string name="browser">浏览器中打开</string>
@@ -56,5 +62,8 @@
     <string name="about7">• greenDAO - github.com/greenrobot/greenDAO</string>
     <string name="about8">• 和风天气提供天气数据</string>
     <string name="about9">• 高德定位提供定位服务</string>
+    <string name="hot">近期热门</string>
+    <string name="hot_more">更多热门推荐</string>
+    <string name="may_like">你可能会喜欢</string>
 
 </resources>

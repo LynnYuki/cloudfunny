@@ -1,62 +1,53 @@
 package com.example.lynnyuki.cloudfunny.view.Eyepetizer;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.lynnyuki.cloudfunny.R;
+import com.example.lynnyuki.cloudfunny.adapter.EyepetizerHotFragmentPagerAdapter;
 import com.example.lynnyuki.cloudfunny.base.BaseActivity;
-import com.example.lynnyuki.cloudfunny.model.bean.VideoBean;
-import com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter.EyepetizerAdapter;
 
 
+import java.util.Objects;
+
+import butterknife.BindArray;
 import butterknife.BindView;
 
 /**
- * Created by xiarh on 2018/2/8.
+ * 热门视频排行
  */
 
 public class EyepetizerHotActivity extends BaseActivity {
 
+    private static final String TAG = "EypetizerHotActivity";
+
+    private EyepetizerHotFragmentPagerAdapter eyepetizerHotFragmentPagerAdapter;
+    @BindView(R.id.viewpager)
+    ViewPager myViewPager;
+    @BindView(R.id.tab_layout)
+    TabLayout myTablayout;
+    @BindArray(R.array.hot_tittles)
+    String[] myHotTitles;
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.recyclerview_eyepetizer)
-    RecyclerView recyclerView;
-
-    private EyepetizerAdapter hotAdapter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_eyepetizer;
+        return  R.layout.activity_eyepetizer_hot;
     }
 
     @Override
     protected void initialize() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setTitle("热门排行");
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        VideoBean hotVideoBean = (VideoBean) bundle.getSerializable("data");
+        eyepetizerHotFragmentPagerAdapter = new EyepetizerHotFragmentPagerAdapter(getSupportFragmentManager(),myHotTitles);
+        myViewPager.setAdapter(eyepetizerHotFragmentPagerAdapter);
+        myTablayout.setupWithViewPager(myViewPager);
+        myViewPager.setOffscreenPageLimit(3);
 
-        hotAdapter = new EyepetizerAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.setAdapter(hotAdapter);
-        hotAdapter.setNewData(hotVideoBean.getItemList());
-        hotAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                VideoBean.ItemListBean bean = (VideoBean.ItemListBean) adapter.getData().get(position);
-                VideoBean.ItemListBean.DataBeanX beanX = bean.getData();
-                Intent intent = new Intent(mContext, EyepetizerDetailActivity.class);
-                intent.putExtra("data", beanX);
-                mContext.startActivity(intent);
-            }
-        });
     }
 }

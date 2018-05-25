@@ -5,7 +5,9 @@ import android.util.AttributeSet;
 
 import com.tencent.smtt.sdk.WebView;
 
-
+/**
+ * WebView网页展示
+ */
 
 public class X5WebView extends WebView {
 

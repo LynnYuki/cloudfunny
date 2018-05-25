@@ -3,7 +3,7 @@ package com.example.lynnyuki.cloudfunny.util;
 import android.graphics.Color;
 
 /**
- * Created by xiarh on 2018/2/11.
+ * 颜色处理工具类
  */
 
 public class ColorUtil {

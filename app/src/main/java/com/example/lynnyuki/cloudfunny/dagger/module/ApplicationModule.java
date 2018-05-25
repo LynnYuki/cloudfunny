@@ -11,6 +11,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * 全局APP模块
+ */
 
 @Module
 public class ApplicationModule {

@@ -17,7 +17,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
-
+/**
+ * Fragment 基类
+ */
 
 public abstract class BaseFragment extends SupportFragment {
     private static final String TAG="BaseFragment";
@@ -53,7 +55,6 @@ public abstract class BaseFragment extends SupportFragment {
                             @Nullable Bundle savedInstanceState){
         mview = inflater.inflate(getLayoutId(),null);
         myBinder = ButterKnife.bind(this,mview);
-//        initListener(mview);
         return mview;
 
     }
@@ -65,15 +66,10 @@ public abstract class BaseFragment extends SupportFragment {
         initialize();
 
     }
-//    protected  abstract void  initListener(View view);
-//    protected abstract View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     @Override
     public void onDestroyView(){
         super.onDestroyView();
-//        if(myBinder == null){
-//            myBinder.unbind();
-//        }
         myBinder.unbind();
         Log.d(TAG,"销毁");
     }

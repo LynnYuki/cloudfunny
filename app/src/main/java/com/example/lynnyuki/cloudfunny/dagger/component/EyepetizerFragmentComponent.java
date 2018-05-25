@@ -8,9 +8,8 @@ import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerFragment;
 import dagger.Component;
 
 /**
- * Created by xiarh on 2018/2/7.
+ * 开眼视频组件
  */
-
 @FragmentScope
 @Component(dependencies = AppComponent.class,
         modules = EyepetizerFragmentModule.class)

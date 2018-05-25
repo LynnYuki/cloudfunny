@@ -5,6 +5,9 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
+/**
+ * 收藏管理实体Bean
+ */
 @Entity
 public class LikeBean {
     @Id

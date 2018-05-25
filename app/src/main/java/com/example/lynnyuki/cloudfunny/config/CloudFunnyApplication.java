@@ -14,6 +14,9 @@ import com.tencent.smtt.sdk.QbSdk;
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
+/**
+ * app应用类
+ */
 
 public class CloudFunnyApplication extends Application {
 

@@ -16,7 +16,7 @@ import java.util.Enumeration;
 
 /**
  * 网络相关工具类
- * Created by xiarh on 2017/8/16.
+ *
  */
 
 public class AppNetWorkUtil {

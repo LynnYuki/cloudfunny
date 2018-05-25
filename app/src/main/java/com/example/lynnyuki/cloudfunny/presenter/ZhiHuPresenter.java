@@ -16,6 +16,9 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * 知乎Presenter
+ */
 public class ZhiHuPresenter extends RxPresenter<ZhiHuContract.View> implements ZhiHuContract.Presenter {
     private ZhiHuApi zhiHuApi;
     private Context context;

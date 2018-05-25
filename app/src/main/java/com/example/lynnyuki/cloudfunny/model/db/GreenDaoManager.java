@@ -9,7 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Created by xiarh on 2017/11/10.
+ * GreenDao 管理类
  */
 
 public class GreenDaoManager {

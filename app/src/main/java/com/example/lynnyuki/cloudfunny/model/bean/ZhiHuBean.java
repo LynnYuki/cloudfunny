@@ -3,7 +3,7 @@ package com.example.lynnyuki.cloudfunny.model.bean;
 import java.util.List;
 
 /**
- * Created by xiarh on 2017/12/4.
+ * 知乎实体Bean
  */
 
 public class ZhiHuBean {

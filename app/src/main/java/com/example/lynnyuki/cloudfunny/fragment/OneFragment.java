@@ -22,15 +22,16 @@ import butterknife.BindArray;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 首页Fragment
  */
 public class OneFragment extends BaseFragment {
     private static final String TAG = "OneFragment";
+    private OneFragmentPageAdapter oneFPAapter;
+
     @BindView(R.id.viewpager)
     ViewPager myViewPager;
     @BindView(R.id.tab_layout)
     TabLayout myTabLayout;
-    private OneFragmentPageAdapter oneFPAapter;
     @BindArray(R.array.tittles)
     String[] myTitles;
 

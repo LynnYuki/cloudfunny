@@ -15,6 +15,9 @@ import android.widget.ImageView;
 import com.example.lynnyuki.cloudfunny.util.BitmapUtils;
 import com.example.lynnyuki.cloudfunny.R;
 
+/**
+ * APP 启动画面Activity
+ */
 public class SplashActivity extends FragmentActivity {
 
     @Override

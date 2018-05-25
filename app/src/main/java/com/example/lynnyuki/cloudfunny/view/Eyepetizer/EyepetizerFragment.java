@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.lynnyuki.cloudfunny.R;
@@ -20,7 +21,7 @@ import com.example.lynnyuki.cloudfunny.dagger.module.EyepetizerFragmentModule;
 import com.example.lynnyuki.cloudfunny.model.bean.VideoBean;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 import com.example.lynnyuki.cloudfunny.presenter.EyepetizerPresenter;
-import com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter.Eyepetizer2Adapter;
+import com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter.EyepetizerAdapterTwo;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter.EyepetizerAdapter;
 
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 /**
- * Created by xiarh on 2018/2/7.
+ * 视频首页
  */
 
 public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> implements EyepetizerContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener {
@@ -51,7 +52,7 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
 
     private EyepetizerAdapter dailyAdapter;
 
-    private Eyepetizer2Adapter hotAdapter;
+    private EyepetizerAdapterTwo hotAdapter;
 
     private VideoBean hotVideoBean = new VideoBean();
 
@@ -79,7 +80,7 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
         swipeRefreshLayout.setOnRefreshListener(this);
 
         mPresenter.getVideoData(page, Constants.EYEPETIZER_UDID,"weekly", "256", "XXX");
-        mPresenter.getPTP();
+
 
         View headerView = getActivity().getLayoutInflater().inflate(R.layout.header_eyepetizer, null);
         recyclerViewTop = headerView.findViewById(R.id.recyclerview_eyepetizer_top);
@@ -91,12 +92,11 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, EyepetizerHotActivity.class);
-                intent.putExtra("data", hotVideoBean);
                 mContext.startActivity(intent);
             }
         });
 
-        hotAdapter = new Eyepetizer2Adapter();
+        hotAdapter = new EyepetizerAdapterTwo();
         hotAdapter.setOnItemClickListener(this);
         recyclerViewTop.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewTop.setAdapter(hotAdapter);
@@ -140,6 +140,8 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
     public void onRefresh() {
         page = 1;
         mPresenter.getVideoData(page, Constants.EYEPETIZER_UDID,"weekly", "256", "XXX");
+        mPresenter.getVideoData(page, Constants.EYEPETIZER_UDID,"monthly", "256", "XXX");
+        mPresenter.getVideoData(page, Constants.EYEPETIZER_UDID,"historical", "256", "XXX");
         // 这里的作用是防止下拉刷新的时候还可以上拉加载
         dailyAdapter.setEnableLoadMore(false);
     }
@@ -198,17 +200,7 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
 
     @Override
     public void failGetHotData() {
-
+        Toast.makeText(mContext,"服务器错误，无法获取到数据。",Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * 省流量模式，刷新Adapter
-     */
-    @Override
-    public void refreshAdapter(boolean isRefreshed) {
-        if (isRefreshed) {
-            hotAdapter.notifyDataSetChanged();
-            dailyAdapter.notifyDataSetChanged();
-        }
-    }
 }
