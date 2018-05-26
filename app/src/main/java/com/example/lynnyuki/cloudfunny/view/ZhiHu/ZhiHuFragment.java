@@ -1,16 +1,15 @@
 package com.example.lynnyuki.cloudfunny.view.ZhiHu;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -67,7 +66,12 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
     }
 
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_zhihu;
+    }
     @SuppressLint("ResourceAsColor")
+
     @Override
     protected void initialize() {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -77,7 +81,7 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
         swipeRefreshLayout.setOnRefreshListener(this);
         mPresenter.getZhiHuData();
         Log.e(TAG,"时间"+DateUtil.LongString(TimeMillis));
-
+        setHasOptionsMenu(true);
         zhiHuAdapter = new ZhiHuAdapter();
         recyclerView.setAdapter(zhiHuAdapter);
         zhiHuAdapter.setOnLoadMoreListener(this,recyclerView);
@@ -105,14 +109,14 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
 
     }
 
-
-
-
-
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_refresh;
+    /**
+     * Fragment重建菜单栏
+     * @param menu
+     * @param inflater
+     */
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
     }
 
     /**

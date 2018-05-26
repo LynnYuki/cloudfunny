@@ -5,6 +5,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,6 +77,7 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
 
     @Override
     protected void initialize() {
+        setHasOptionsMenu(true);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -133,6 +136,10 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
         mContext.startActivity(intent);
     }
 
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+    }
     /**
      * 下拉刷新
      */

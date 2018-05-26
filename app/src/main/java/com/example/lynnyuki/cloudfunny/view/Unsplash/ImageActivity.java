@@ -40,11 +40,10 @@ public class ImageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         hideOrShowToolbar();
 
-//        ButterKnife.bind(this);
         photo = getIntent().getParcelableExtra("URLS");
         setTitle(photo.getUser().getName());
         imgUrl = photo.getUrls().getRegular();
@@ -103,6 +102,9 @@ public class ImageActivity extends BaseActivity {
         hideOrShowToolbar();
     }
 
+    /**
+     * 图片点击时显示或隐藏Toolbar
+     */
     private void hideOrShowToolbar() {
         if (Objects.requireNonNull(getSupportActionBar()).isShowing()) {
             getSupportActionBar().hide();

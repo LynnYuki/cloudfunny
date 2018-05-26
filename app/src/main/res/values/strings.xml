@@ -13,6 +13,7 @@
         <item name="monthly">月</item>
         <item name="historical">总</item>
     </string-array>
+    <string name="image_search">图片搜索</string>
     <string name="kaiyan">开眼视频</string>
     <string name="zhihu">知乎日报</string>
     <string name="browser">浏览器中打开</string>

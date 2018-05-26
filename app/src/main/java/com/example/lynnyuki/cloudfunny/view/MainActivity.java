@@ -1,5 +1,6 @@
 package com.example.lynnyuki.cloudfunny.view;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -30,6 +32,7 @@ import com.example.lynnyuki.cloudfunny.util.BottomNavigationViewHelper;
 import com.example.lynnyuki.cloudfunny.view.About.AboutActivity;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerFragment;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerHotFragment;
+import com.example.lynnyuki.cloudfunny.view.ImageSearch.ImageSearchActivity;
 import com.example.lynnyuki.cloudfunny.view.Like.LikeFragment;
 import com.example.lynnyuki.cloudfunny.view.Setting.SettingActivity;
 import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
@@ -50,7 +53,7 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     private OneFragment oneFragment;
     private ZhiHuFragment zhiHuFragment;
     private EyepetizerFragment eyepetizerFragment;
-    private ActionBarDrawerToggle mToggle;
+//    private ActionBarDrawerToggle mToggle;
     private EyepetizerHotFragment eyepetizerHotFragment;
 
     // 权限获取提示框
@@ -99,9 +102,9 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
         // 关联左上角图标和侧滑菜单
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
-        mToggle.syncState();
-        mDrawerLayout.addDrawerListener(mToggle);
+//        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+//        mToggle.syncState();
+//        mDrawerLayout.addDrawerListener(mToggle);
         BottomNavigationViewHelper.disableShiftMode(mBottomNav);
         mBottomNav.setOnNavigationItemSelectedListener(this);
 
@@ -111,6 +114,35 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
 
     }
 
+    /**
+     * 创建菜单
+     * @param search
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu search) {
+        getMenuInflater().inflate(R.menu.menu_main, search);
+        return true;
+    }
+
+    /**
+     * 菜单点击事件
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.search_image:
+                startActivity(new Intent(mContext, ImageSearchActivity.class));
+            break;
+        }
+        return true;
+    }
+
+    /**
+     * 初始化Fragment
+     */
     private  void initFragment(){
 
         likeFragment = new LikeFragment();
@@ -205,6 +237,11 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
         }
     }
 
+    /**
+     * 底部导航栏点击事件
+     * @param item
+     * @return
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

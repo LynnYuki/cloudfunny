@@ -55,6 +55,9 @@
         <activity android:name=".view.Eyepetizer.EyepetizerHotActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WebTheme"/>
+        <activity android:name=".view.ImageSearch.ImageSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WebTheme"/>
 
 
 

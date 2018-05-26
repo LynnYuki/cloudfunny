@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -51,6 +53,7 @@ public class LikeFragment extends BaseFragment {
 
     @Override
     protected void initialize() {
+        setHasOptionsMenu(true);
         daoManager = CloudFunnyApplication.getAppComponent().getGreenDaoManager();
         likeAdapter = new LikeAdapter();
         //查询所有收藏记录
@@ -103,6 +106,16 @@ public class LikeFragment extends BaseFragment {
             }
         });
         likeAdapter.setEmptyView(R.layout.view_empty, recyclerView);
+    }
+    /**
+     * Fragment重建菜单栏
+     * @param menu
+     * @param inflater
+     */
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.image_search, menu);
     }
 
     @Override

@@ -79,7 +79,7 @@ public class ImageFragment extends BaseFragment implements BaseQuickAdapter.Requ
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_blank;
+        return R.layout.fragment_image;
     }
 
     public ImageFragment() {

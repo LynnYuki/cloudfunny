@@ -49,7 +49,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>i
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder,final int position) {
         final Photo photo = photoList.get(position);
         GlideApp.with(mContext)
                 .load(photo.getUrls().getRegular())
