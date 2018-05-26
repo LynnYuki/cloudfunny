@@ -1,5 +1,6 @@
 package com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -23,20 +24,21 @@ public class EyepetizerAdapter extends BaseQuickAdapter<VideoBean.ItemListBean, 
 
     @Override
     protected void convert(BaseViewHolder helper, VideoBean.ItemListBean item) {
-
-        helper.setText(R.id.txt_video_duration, SystemUtil.second2Minute(item.getData().getContent().getData().getDuration()));
-        helper.setText(R.id.txt_video_title, item.getData().getContent().getData().getTitle());
-        helper.setText(R.id.txt_video_content, item.getData().getHeader().getTitle() + " / "
-                + item.getData().getHeader().getDescription());
-        ImageLoader.loadAllNoPlaceHolder(mContext, item.getData().getContent().getData().getCover().getDetail()
-                , (RoundedImageView) helper.getView(R.id.img_video));
-        ImageLoader.loadAllNoPlaceHolder(mContext, item.getData().getHeader().getIcon()
-                , (RoundedImageView) helper.getView(R.id.img_video_author));
-        ImageView imgDaily = helper.getView(R.id.img_dialy);
+            if (item.getData().getContent()!=null && item.getType().equals("followCard")){
+            helper.setText(R.id.txt_video_duration, SystemUtil.second2Minute(item.getData().getContent().getData().getDuration()));
+            helper.setText(R.id.txt_video_title, item.getData().getContent().getData().getTitle());
+            helper.setText(R.id.txt_video_content, item.getData().getHeader().getTitle() + " / "
+                    + item.getData().getHeader().getDescription());
+            ImageLoader.loadAllNoPlaceHolder(mContext, item.getData().getContent().getData().getCover().getDetail()
+                    , (RoundedImageView) helper.getView(R.id.img_video));
+            ImageLoader.loadAllNoPlaceHolder(mContext, item.getData().getHeader().getIcon()
+                    , (RoundedImageView) helper.getView(R.id.img_video_author));
+            ImageView imgDaily = helper.getView(R.id.img_dialy);
         if (item.getData().getHeader().getDescription().contains("每日编辑精选")) {
             imgDaily.setVisibility(View.VISIBLE);
         } else {
             imgDaily.setVisibility(View.GONE);
         }
+    }
     }
 }

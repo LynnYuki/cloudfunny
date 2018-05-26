@@ -26,6 +26,9 @@ import com.example.lynnyuki.cloudfunny.presenter.EyepetizerPresenter;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter.EyepetizerAdapterTwo;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter.EyepetizerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -35,7 +38,6 @@ import butterknife.BindView;
  */
 
 public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> implements EyepetizerContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener {
-
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerview_eyepetizer)
@@ -59,6 +61,7 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
     private VideoBean hotVideoBean = new VideoBean();
 
     private int page = 1;
+
 
     @Override
     protected int getLayoutId() {
@@ -166,6 +169,7 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
 
     @Override
     public void showDailyVideoData(VideoBean dailyBean) {
+        List<VideoBean.ItemListBean> itemListBeans = new ArrayList<>();
         if (null != swipeRefreshLayout && swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
             // 下拉刷新后可以上拉加载
@@ -175,10 +179,21 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
             // 上拉加载后可以下拉刷新
             swipeRefreshLayout.setEnabled(true);
         }
-        if (page == 1) {
-            dailyAdapter.setNewData(dailyBean.getItemList());
+        //过滤掉不符合要求的视频信息，返回数据中有不包含content的itemlist,会导致加载视频NPE
+        if (page == 1 ) {
+            for(int i=0;i<dailyBean.getItemList().size();i++){
+                if(dailyBean.getItemList().get(i).getType().equals("followCard")){
+                    itemListBeans.add(dailyBean.getItemList().get(i));
+                }
+            }
+            dailyAdapter.setNewData(itemListBeans);
         } else {
-            dailyAdapter.addData(dailyBean.getItemList());
+            for(int i=0;i<dailyBean.getItemList().size();i++){
+                if(dailyBean.getItemList().get(i).getType().equals("followCard")){
+                    itemListBeans.add(dailyBean.getItemList().get(i));
+                }
+            }
+            dailyAdapter.addData(itemListBeans);
         }
         if (dailyBean.getItemList() != null) {
             dailyAdapter.loadMoreComplete();

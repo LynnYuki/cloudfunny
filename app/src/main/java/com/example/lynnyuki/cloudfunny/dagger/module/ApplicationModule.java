@@ -3,7 +3,7 @@ package com.example.lynnyuki.cloudfunny.dagger.module;
 import android.content.Context;
 
 import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
-import com.example.lynnyuki.cloudfunny.model.db.GreenDaoManager;
+import com.example.lynnyuki.cloudfunny.model.db.LikeBeanGreenDaoManager;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 
 import javax.inject.Singleton;
@@ -38,7 +38,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    GreenDaoManager provideGreenDaoManager(Context context){
-        return new GreenDaoManager(context);
+    LikeBeanGreenDaoManager provideGreenDaoManager(Context context){
+        return new LikeBeanGreenDaoManager(context);
     }
 }

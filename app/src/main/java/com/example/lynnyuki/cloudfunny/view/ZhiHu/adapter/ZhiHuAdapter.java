@@ -23,7 +23,7 @@ public class ZhiHuAdapter extends BaseQuickAdapter<ZhiHuBean.StoriesBean, BaseVi
     }
         @Override
         protected void convert(BaseViewHolder helper,ZhiHuBean.StoriesBean item){
-
+        if (item!=null){
         helper.setText(R.id.txt_zhihu_title,item.getTitle());
             if (  !AppNetWorkUtil.isNetworkConnected(mContext)) {
                 ImageLoader.loadDefault(mContext,(ImageView) helper.getView(R.id.img_zhihu));
@@ -32,5 +32,6 @@ public class ZhiHuAdapter extends BaseQuickAdapter<ZhiHuBean.StoriesBean, BaseVi
             }
 
         }
+    }
 
 }

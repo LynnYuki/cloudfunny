@@ -12,14 +12,14 @@ import javax.inject.Inject;
  * GreenDao 管理类
  */
 
-public class GreenDaoManager {
+public class LikeBeanGreenDaoManager {
 
     private DaoMaster mDaoMaster;
 
     private DaoSession mDaoSession;
 
     @Inject
-    public GreenDaoManager(Context context) {
+    public LikeBeanGreenDaoManager(Context context) {
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, "like", null);//此处为自己需要处理的表
         mDaoMaster = new DaoMaster(devOpenHelper.getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();

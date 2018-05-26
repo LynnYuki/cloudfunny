@@ -18,9 +18,11 @@ public class EyepetizerTagAdapter extends BaseQuickAdapter<VideoBean.ItemListBea
 
     @Override
     protected void convert(BaseViewHolder helper, VideoBean.ItemListBean.DataBeanX.ContentBean.DataBean.TagBean item) {
+        if(item!=null){
         helper.setText(R.id.txt_video_tag_name, "#" + item.getName() + "#");
         RoundedImageView imageView = helper.getView(R.id.img_video_tag);
         ImageLoader.loadAllNoPlaceHolder(mContext,item.getBgPicture(),imageView);
         imageView.setAlpha(0.9f);
+        }
     }
 }

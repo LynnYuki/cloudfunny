@@ -36,4 +36,5 @@ public class LikeAdapter extends BaseQuickAdapter<LikeBean, BaseViewHolder> {
             ImageLoader.loadAll(mContext,item.getImageUrl(),(ImageView) helper.getView(R.id.img_like));
         }
     }
+
 }

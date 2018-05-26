@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,6 +19,7 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.lynnyuki.cloudfunny.model.db.LikeBeanGreenDaoManager;
 import com.tencent.smtt.export.external.interfaces.GeolocationPermissionsCallback;
 import com.tencent.smtt.export.external.interfaces.JsResult;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
@@ -31,7 +31,6 @@ import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.base.BaseActivity;
 import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
 import com.example.lynnyuki.cloudfunny.model.bean.LikeBean;
-import com.example.lynnyuki.cloudfunny.model.db.GreenDaoManager;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 import com.example.lynnyuki.cloudfunny.util.SnackBarUtils;
 import com.example.lynnyuki.cloudfunny.widget.X5WebView;
@@ -66,7 +65,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
 
     private MenuItem menuItem;
 
-    private GreenDaoManager daoManager;
+    private LikeBeanGreenDaoManager daoManager;
 
     private SharePrefManager sharePrefManager;
 

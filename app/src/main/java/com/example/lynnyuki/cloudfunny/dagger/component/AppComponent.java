@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.lynnyuki.cloudfunny.dagger.module.ApplicationModule;
 import com.example.lynnyuki.cloudfunny.dagger.module.HttpModule;
-import com.example.lynnyuki.cloudfunny.model.db.GreenDaoManager;
+import com.example.lynnyuki.cloudfunny.model.db.LikeBeanGreenDaoManager;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 
 import javax.inject.Singleton;
@@ -28,6 +28,6 @@ public interface AppComponent {
 
     OkHttpClient getOkHttpClient();
 
-    GreenDaoManager getGreenDaoManager();
+    LikeBeanGreenDaoManager getGreenDaoManager();
 
 }

@@ -17,7 +17,7 @@ import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
 import com.example.lynnyuki.cloudfunny.config.Constants;
 import com.example.lynnyuki.cloudfunny.model.bean.LikeBean;
 import com.example.lynnyuki.cloudfunny.model.bean.VideoBean;
-import com.example.lynnyuki.cloudfunny.model.db.GreenDaoManager;
+import com.example.lynnyuki.cloudfunny.model.db.LikeBeanGreenDaoManager;
 import com.example.lynnyuki.cloudfunny.util.ImageLoader;
 import com.example.lynnyuki.cloudfunny.util.SnackBarUtils;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.adapter.EyepetizerTagAdapter;
@@ -67,7 +67,7 @@ public class EyepetizerDetailActivity extends BaseActivity {
 
     private EyepetizerTagAdapter tagAdapter;
 
-    private GreenDaoManager daoManager;
+    private LikeBeanGreenDaoManager daoManager;
 
     private Boolean isLiked;
 
@@ -112,6 +112,8 @@ public class EyepetizerDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         videoBean = (VideoBean.ItemListBean.DataBeanX) bundle.get("data");
+        assert videoBean != null;
+        if(videoBean.getContent()!=null){
         txtVideoTitle.setText(videoBean.getContent().getData().getTitle());
         txtVideoSubtitle.setText(videoBean.getHeader().getDescription());
         txtVideoContent.setText(videoBean.getContent().getData().getDescription());
@@ -127,18 +129,20 @@ public class EyepetizerDetailActivity extends BaseActivity {
         recyclerviewTag.setAdapter(tagAdapter);
         daoManager = CloudFunnyApplication.getAppComponent().getGreenDaoManager();
         setLikeState(daoManager.queryByGuid(videoBean.getHeader().getId() + ""));
+        }
     }
 
     private void initVideoPlayer() {
         LinkedHashMap map = new LinkedHashMap();
-        if (videoBean.getContent().getData().getPlayInfo().size() == 3) {
+
+        if (videoBean.getContent()!=null && videoBean.getContent().getData().getPlayInfo().size() == 3) {
             map.put("流畅", videoBean.getContent().getData().getPlayInfo().get(0).getUrl());
             map.put("标清", videoBean.getContent().getData().getPlayInfo().get(1).getUrl());
             map.put("高清", videoBean.getContent().getData().getPlayInfo().get(2).getUrl());
-        } else if (videoBean.getContent().getData().getPlayInfo().size() == 2) {
+        } else if (videoBean.getContent()!=null &&videoBean.getContent().getData().getPlayInfo().size() == 2) {
             map.put("标清", videoBean.getContent().getData().getPlayInfo().get(0).getUrl());
             map.put("高清", videoBean.getContent().getData().getPlayInfo().get(1).getUrl());
-        } else if (videoBean.getContent().getData().getPlayInfo().size() == 1) {
+        } else if (videoBean.getContent()!=null &&videoBean.getContent().getData().getPlayInfo().size() == 1) {
             map.put("高清", videoBean.getContent().getData().getPlayInfo().get(0).getUrl());
         }
         Object[] objects = new Object[3];
@@ -147,10 +151,12 @@ public class EyepetizerDetailActivity extends BaseActivity {
         objects[2] = new HashMap<>();
         videoPlayerStandard.backButton.setVisibility(View.VISIBLE);
         videoPlayerStandard.titleTextView.setTextSize(16);
+        if (videoBean.getContent()!=null){
         videoPlayerStandard.setUp(objects, 0,
                 JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, videoBean.getContent().getData().getTitle());
         ImageLoader.loadAllNoPlaceHolder(mContext, videoBean.getContent().getData().getCover().getFeed()
                 ,videoPlayerStandard.thumbImageView);
+        }
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     }
@@ -159,12 +165,13 @@ public class EyepetizerDetailActivity extends BaseActivity {
     public void onLayoutShareClick() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, videoBean.getContent().getData().getTitle());
-        intent.putExtra(Intent.EXTRA_TEXT, videoBean.getContent().getData().getPlayUrl());
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(Intent.createChooser(intent, videoBean.getContent().getData().getTitle()));
+        if (videoBean.getContent() != null) {
+            intent.putExtra(Intent.EXTRA_SUBJECT, videoBean.getContent().getData().getTitle());
+            intent.putExtra(Intent.EXTRA_TEXT, videoBean.getContent().getData().getPlayUrl());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(Intent.createChooser(intent, videoBean.getContent().getData().getTitle()));
+        }
     }
-
     @OnClick(R.id.img_video_collection)
     public void onImgVideoCollectionClick() {
         if (isLiked) {
@@ -179,6 +186,7 @@ public class EyepetizerDetailActivity extends BaseActivity {
             txtVideoCollection.setText("已收藏");
             LikeBean bean = new LikeBean();
             bean.setId(null);
+            if(videoBean.getContent()!=null){
             bean.setGuid(videoBean.getHeader().getId() + "");
             bean.setImageUrl(videoBean.getContent().getData().getCover().getDetail());
             bean.setTitle(videoBean.getContent().getData().getTitle());
@@ -188,6 +196,7 @@ public class EyepetizerDetailActivity extends BaseActivity {
             daoManager.insert(bean);
             isLiked = true;
             SnackBarUtils.show(((ViewGroup) findViewById(android.R.id.content)).getChildAt(0), "成功添加到收藏");
+            }
         }
     }
 

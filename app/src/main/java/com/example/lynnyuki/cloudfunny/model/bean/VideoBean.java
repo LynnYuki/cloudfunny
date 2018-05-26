@@ -1,5 +1,7 @@
 package com.example.lynnyuki.cloudfunny.model.bean;
 
+import android.support.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.List;
 

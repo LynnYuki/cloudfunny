@@ -40,8 +40,8 @@ public class EyepetizerPresenter extends RxPresenter<EyepetizerContract.View> im
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseSubscriber<VideoBean>(context, mView) {
                     @Override
-                    public void onNext(VideoBean dailyVideoBean) {
-                        mView.showDailyVideoData(dailyVideoBean);
+                    public void onNext(VideoBean dailyBean) {
+                        mView.showDailyVideoData(dailyBean);
                     }
 
                     @Override
@@ -80,8 +80,8 @@ public class EyepetizerPresenter extends RxPresenter<EyepetizerContract.View> im
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseSubscriber<VideoBean>(context, mView) {
                     @Override
-                    public void onNext(VideoBean dailyVideoBean) {
-                        mView.showDailyVideoData(dailyVideoBean);
+                    public void onNext(VideoBean dailyBean) {
+                        mView.showDailyVideoData(dailyBean);
                     }
 
                     @Override

@@ -18,7 +18,7 @@ import com.example.lynnyuki.cloudfunny.fragment.BaseFragment;
 import com.example.lynnyuki.cloudfunny.config.Constants;
 import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
 import com.example.lynnyuki.cloudfunny.model.bean.LikeBean;
-import com.example.lynnyuki.cloudfunny.model.db.GreenDaoManager;
+import com.example.lynnyuki.cloudfunny.model.db.LikeBeanGreenDaoManager;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 import com.example.lynnyuki.cloudfunny.view.Like.adapter.LikeAdapter;
 import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
@@ -44,7 +44,7 @@ public class LikeFragment extends BaseFragment {
 
     private LikeAdapter likeAdapter;
 
-    private GreenDaoManager daoManager;
+    private LikeBeanGreenDaoManager daoManager;
 
     @Override
     protected int getLayoutId() {
