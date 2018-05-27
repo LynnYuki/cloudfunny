@@ -55,6 +55,16 @@ public class ZhiHuBean {
 
         private int type;
         private int id;
+        private String date;
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
         private String ga_prefix;
         private String title;
         private List<String> images;
@@ -98,7 +108,11 @@ public class ZhiHuBean {
             this.images = images;
         }
 
+        public StoriesBean(){}
 
+        public StoriesBean(String date){
+            this.date = date;
+        }
 
 
     }

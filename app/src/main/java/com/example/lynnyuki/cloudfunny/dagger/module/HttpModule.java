@@ -62,7 +62,7 @@ public class HttpModule {
                 }
                 Response response = chain.proceed(request);
                 if (AppNetWorkUtil.isNetworkConnected(context)) {
-                    int maxAge = 0;
+                    int maxAge = 60;
                     // 有网络时, 不缓存, 最大保存时长为0
                     response.newBuilder()
                             .header("Cache-Control", "public, max-age=" + maxAge)

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.TextView;
 
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -48,6 +49,7 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
 
+
     private int page = 1;
     private static final int PAGE_SIZE = 30;
     private static final int NULLNEWS = 0;
@@ -75,7 +77,9 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
     @Override
     protected void initialize() {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
+        recyclerView.setHasFixedSize(false);
+        //给RecyclerView Item之间加上间隔线
+//      recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -83,6 +87,7 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
         Log.e(TAG,"时间"+DateUtil.LongString(TimeMillis));
         setHasOptionsMenu(true);
         zhiHuAdapter = new ZhiHuAdapter();
+        zhiHuAdapter.setmDate(TimeMillis);
         recyclerView.setAdapter(zhiHuAdapter);
         zhiHuAdapter.setOnLoadMoreListener(this,recyclerView);
         zhiHuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -124,9 +129,11 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
      */
     @Override
     public void onRefresh() {
-
+        page = 1;
         mPresenter.getZhiHuData();
         TimeMillis = date_primary;
+        zhiHuAdapter.setPage(page);
+        zhiHuAdapter.setmDate(TimeMillis);
         zhiHuAdapter.setEnableLoadMore(false);
         Log.e(TAG,"TimeMills"+TimeMillis);
         Log.e(TAG,"Page"+page);
@@ -138,9 +145,12 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
      */
     @Override
     public void onLoadMoreRequested() {
+        page++;
        TimeMillis-=86400000;
         date = DateUtil.LongString(TimeMillis);
         mPresenter.getZhiHuBefore(date);
+        zhiHuAdapter.setmDate(TimeMillis);
+        zhiHuAdapter.setPage(page);
         swipeRefreshLayout.setEnabled(false);
         Log.e(TAG,"TimeMills"+TimeMillis);
         Log.e(TAG,"Page"+page);
