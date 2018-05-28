@@ -12,7 +12,6 @@ import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 
 import com.example.lynnyuki.cloudfunny.config.Constants;
-import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 import com.example.lynnyuki.cloudfunny.util.AppApplicationUtil;
 import com.example.lynnyuki.cloudfunny.util.SnackBarUtils;
 import com.example.lynnyuki.cloudfunny.util.SystemUtil;
@@ -95,8 +94,9 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
             WebActivity.open(new WebActivity.Builder()
                     .setGuid("")
                     .setImgUrl("")
-                    .setType(Constants.TYPE_DEFAULT)
                     .setUrl("http://music.163.com/#/user/home?id=326897114")
+                    .setType(Constants.TYPE_DEFAULT)
+                    .setIsZhiHuUrl(false)
                     .setTitle("网易云音乐主页")
                     .setShowLikeIcon(false)
                     .setContext(getActivity()));
@@ -105,8 +105,9 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
             WebActivity.open(new WebActivity.Builder()
                     .setGuid("")
                     .setImgUrl("")
-                    .setType(Constants.TYPE_DEFAULT)
                     .setUrl("https://github.com/LynnYuki/cloudfunny")
+                    .setType(Constants.TYPE_DEFAULT)
+                    .setIsZhiHuUrl(false)
                     .setTitle("项目主页")
                     .setShowLikeIcon(false)
                     .setContext(getActivity()));

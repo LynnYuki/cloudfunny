@@ -63,6 +63,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
 
     private String title;
 
+    private boolean isZhiHuUrl;
     private boolean isShowLikeIcon;
 
     private MenuItem menuItem;
@@ -95,7 +96,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                 return false;
             }
         });
-        //获取ZhiHuFragment点击事件传过来的数据
+        //获取Fragment点击事件传过来的数据
         Bundle bundle = getIntent().getExtras();
         if (null != bundle) {
             guid = bundle.getString("guid");
@@ -103,6 +104,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             type = bundle.getInt("type");
             url = bundle.getString("url");
             title = bundle.getString("title");
+            isZhiHuUrl = bundle.getBoolean("isZhiHuUrl");
             isShowLikeIcon = bundle.getBoolean("isshow");
         }
         setTitle(title);
@@ -226,8 +228,13 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                 return false;
             }
         });
-//        webView.loadUrl(url);
+        //判断是不是知乎链接然后选择加载方式
+        if (!isZhiHuUrl){
+        webView.loadUrl(url);
+        Log.e(TAG,"不是知乎链接");
+        }else {
         webView.loadDataWithBaseURL("x-data://base", url, "text/html", "UTF-8", null);
+        }
     }
 
     @Override
@@ -271,7 +278,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                     SnackBarUtils.show(((ViewGroup) findViewById(android.R.id.content)).getChildAt(0), "成功添加到收藏");
                 }
                 break;
-            case R.id.item_copy:
+            case R.id.item_share:
 //                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 //                cm.setText(url);
 //                SnackBarUtils.show(webView, R.string.copy_msg, this);
@@ -286,6 +293,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                 Uri uri = Uri.parse(url);
                 Intent intent1 = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent1);
+                Log.e(TAG,"url不为空");
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -319,6 +327,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         private String imageUrl;
         private int type;
         private String url;
+        private boolean isZhiHuUrl;
         private String title;
         private boolean isShowLikeIcon;
         private Context context;
@@ -347,6 +356,12 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             return this;
         }
 
+
+        public Builder setIsZhiHuUrl(boolean isZhiHuUrl) {
+            this.isZhiHuUrl = isZhiHuUrl;
+            return this;
+        }
+
         public Builder setTitle(String title) {
             this.title = title;
             return this;
@@ -371,6 +386,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         intent.putExtra("url", builder.url);
         intent.putExtra("title", builder.title);
         intent.putExtra("isshow", builder.isShowLikeIcon);
+        intent.putExtra("isZhiHuUrl",builder.isZhiHuUrl);
         builder.context.startActivity(intent);
     }
 }

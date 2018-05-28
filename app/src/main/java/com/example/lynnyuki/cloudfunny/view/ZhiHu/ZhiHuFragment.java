@@ -126,6 +126,7 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
             WebActivity.open(new WebActivity.Builder()
                     .setGuid(zhiHuContentBean.getShare_url())
                     .setType(Constants.TYPE_ZHI_HU)
+                    .setIsZhiHuUrl(true)
                     .setUrl(loadHtml(zhiHuContentBean.getBody()))
                     .setImgUrl(storiesBean.getImages().get(0))
                     .setTitle(storiesBean.getTitle())

@@ -5,12 +5,15 @@ import android.net.Uri;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.base.BaseActivity;
 import com.example.lynnyuki.cloudfunny.config.Constants;
 import com.example.lynnyuki.cloudfunny.util.AppApplicationUtil;
 import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,7 +39,7 @@ public class AboutActivity extends BaseActivity {
     @Override
     protected void initialize() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setTitle("关于");
        textView.setText(getResources().getString(R.string.version) + AppApplicationUtil.getVersionName(mContext));
 
@@ -49,12 +52,17 @@ public class AboutActivity extends BaseActivity {
                 .setImgUrl("")
                 .setType(Constants.TYPE_DEFAULT)
                 .setUrl("https://github.com/LynnYuki/cloudfunny")
+                .setIsZhiHuUrl(false)
                 .setTitle("项目主页")
                 .setShowLikeIcon(false)
                 .setContext(mContext)
         );
     }
 
+    @OnClick(R.id.txt_update)
+    public  void onTxtUpdateClicked(){
+        Toast.makeText(getApplicationContext(),"当前已是最新版本", Toast.LENGTH_SHORT).show();
+    }
     @OnClick(R.id.txt_email)
     public void onTxtEmailClicked() {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "lynnyuku9527@163.com", null));
