@@ -3,7 +3,6 @@ package com.example.lynnyuki.cloudfunny.view.Like;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -61,13 +60,13 @@ public class LikeFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(likeAdapter);
         //当我们确定Item的改变不会影响RecyclerView的宽高的时候可以设置setHasFixedSize(true)，并通过Adapter的增删改插方法去刷新RecyclerView，而不是通过notifyDataSetChanged()。
-        recyclerView.setHasFixedSize(false);
+        recyclerView.setHasFixedSize(true);
         likeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 //获取当前RecyclerView中点击的Item的位置
                 LikeBean bean = (LikeBean) adapter.getData().get(position);
-                if (bean.getType() == Constants.TYPE_KaiYan) {
+                if (bean.getType() == Constants.TYPE_KAI_YAN) {
                     JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
                     JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
                     JZVideoPlayerStandard.startFullscreen(mContext, JZVideoPlayerStandard.class, bean.getUrl(), bean.getTitle());

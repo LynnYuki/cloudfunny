@@ -11,13 +11,12 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
     xmlns:tools="http://schemas.android.com/tools">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    >
 
     <LinearLayout
         android:id="@+id/checkbox"

@@ -35,6 +35,8 @@ import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 import com.example.lynnyuki.cloudfunny.util.SnackBarUtils;
 import com.example.lynnyuki.cloudfunny.widget.X5WebView;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 
 /**
@@ -81,17 +83,19 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         daoManager = CloudFunnyApplication.getAppComponent().getGreenDaoManager();
         sharePrefManager = CloudFunnyApplication.getAppComponent().getSharePrefManager();
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
             @Override
             public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
+                assert child != null;
                 if (child.getScrollY() > 0)
                     return true;
                 return false;
             }
         });
+        //获取ZhiHuFragment点击事件传过来的数据
         Bundle bundle = getIntent().getExtras();
         if (null != bundle) {
             guid = bundle.getString("guid");
@@ -222,7 +226,8 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                 return false;
             }
         });
-        webView.loadUrl(url);
+//        webView.loadUrl(url);
+        webView.loadDataWithBaseURL("x-data://base", url, "text/html", "UTF-8", null);
     }
 
     @Override

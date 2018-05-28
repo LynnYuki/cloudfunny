@@ -2,12 +2,14 @@ package com.example.lynnyuki.cloudfunny.view.ImageSearch;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.kc.unsplash.api.Order;
 import com.kc.unsplash.models.Photo;
 import com.kc.unsplash.models.SearchResults;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -40,8 +43,8 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    Random random = new Random();
-    final int randomPage = random.nextInt(50);
+//    Random random = new Random();
+    private String freshQuery;
     Unsplash unsplash = new Unsplash(Constants.CLIENT_ID);
 
     @Override
@@ -55,12 +58,12 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         mToolbar.setTitle("图片搜索");
+        adapter = new ImageAdapter();
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
-        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setOnRefreshListener(this);
-        Photos(randomPage,30,Order.LATEST);
         recyclerView.setLayoutManager(new LinearLayoutManager(ImageSearchActivity.this));
-
+        Photos(1,15,Order.LATEST);
     }
 
     @Override
@@ -73,6 +76,7 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                freshQuery = query;
                 SearchQuery(query);
                 searchView.clearFocus();
                 return true;
@@ -93,16 +97,17 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
+//         int randomPage = random.nextInt(50);
         if(!AppNetWorkUtil.isNetworkConnected(getApplicationContext())){
             Toast.makeText(this,"当前无网络链接，请检查网络设置。",Toast.LENGTH_SHORT).show();
         }else{
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Photos(randomPage,30,Order.LATEST);
-                }
-
-            }).start();
+//
+           new Thread(new Runnable() {
+               @Override
+               public void run() {
+                   SearchQuery(freshQuery);
+               }
+           }).start();
         }
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -111,7 +116,7 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
         unsplash.getPhotos(f, l, order, new Unsplash.OnPhotosLoadedListener() {
             @Override
             public void onComplete(List<Photo> photos) {
-                if(adapter==null){
+                if(photos.size()!=0){
                 adapter = new ImageAdapter(photos, ImageSearchActivity.this);
                 recyclerView.setAdapter(adapter);
                 }
@@ -131,12 +136,13 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
             public void onComplete(SearchResults results) {
                 List<Photo> photos = results.getResults();
                 if(photos.size()!=0){
-                ImageAdapter adapter = new  ImageAdapter(photos, ImageSearchActivity.this);
+                 adapter = new  ImageAdapter(photos, ImageSearchActivity.this);
                 recyclerView.setAdapter(adapter);
                 }else{
                     Toast.makeText(getApplicationContext(), "没有找到相关图片。", Toast.LENGTH_SHORT).show();
                 }
                 swipeRefreshLayout.setRefreshing(false);
+
             }
             @Override
             public void onError(String error) {

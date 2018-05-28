@@ -24,9 +24,9 @@ public class LikeAdapter extends BaseQuickAdapter<LikeBean, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, LikeBean item) {
         helper.setText(R.id.txt_like_title, item.getTitle());
-        if (item.getType() == Constants.TYPE_ZhiHu) {
+        if (item.getType() == Constants.TYPE_ZHI_HU) {
             helper.setText(R.id.txt_like_type, R.string.zhihu);
-        } else if (item.getType() == Constants.TYPE_KaiYan) {
+        } else if (item.getType() == Constants.TYPE_KAI_YAN) {
             helper.setText(R.id.txt_like_type, R.string.kaiyan);
         }
         helper.setText(R.id.txt_like_date, DateUtil.Long2String(item.getTime()));

@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -24,14 +26,17 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>implements View.OnClickListener{
     private List<Photo> photoList;
+
     private Context mContext;
 
-    public ImageAdapter(List<Photo> photos, Context context) {
+   public ImageAdapter(List<Photo> photos, Context context) {
         photoList = photos;
         mContext = context;
 
     }
+    public ImageAdapter(){
 
+    }
     public void updateList(List<Photo> newList) {
         if (newList.size() != photoList.size()
                 || !newList.containsAll(photoList)
@@ -90,5 +95,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>i
             imageView = view.findViewById(R.id.rvPhoto);
         }
     }
+
 
 }

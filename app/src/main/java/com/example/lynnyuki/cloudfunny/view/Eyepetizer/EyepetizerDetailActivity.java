@@ -191,7 +191,7 @@ public class EyepetizerDetailActivity extends BaseActivity {
             bean.setImageUrl(videoBean.getContent().getData().getCover().getDetail());
             bean.setTitle(videoBean.getContent().getData().getTitle());
             bean.setUrl(videoBean.getContent().getData().getPlayUrl());
-            bean.setType(Constants.TYPE_KaiYan);
+            bean.setType(Constants.TYPE_KAI_YAN);
             bean.setTime(System.currentTimeMillis());
             daoManager.insert(bean);
             isLiked = true;

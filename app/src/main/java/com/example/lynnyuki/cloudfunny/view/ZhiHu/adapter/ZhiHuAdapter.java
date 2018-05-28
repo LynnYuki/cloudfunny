@@ -59,7 +59,7 @@ public class ZhiHuAdapter extends BaseQuickAdapter<ZhiHuBean.StoriesBean, BaseVi
             helper.setText(R.id.txt_zhihu_title,item.getTitle());
             if (  !AppNetWorkUtil.isNetworkConnected(mContext)) {
                 ImageLoader.loadDefault(mContext,(ImageView) helper.getView(R.id.img_zhihu));
-            } else {
+            } else if(item.getImages()!=null) {
                 ImageLoader.loadAll(mContext,item.getImages().get(0),(ImageView) helper.getView(R.id.img_zhihu));
             }
 
@@ -68,8 +68,10 @@ public class ZhiHuAdapter extends BaseQuickAdapter<ZhiHuBean.StoriesBean, BaseVi
             helper.setText(R.id.txt_zhihu_title,item.getTitle());
             if (  !AppNetWorkUtil.isNetworkConnected(mContext)) {
                 ImageLoader.loadDefault(mContext,(ImageView) helper.getView(R.id.img_zhihu));
-            } else {
+            } else if(item.getImages()!=null){
                 ImageLoader.loadAll(mContext,item.getImages().get(0),(ImageView) helper.getView(R.id.img_zhihu));
+            }else if (item.getImages()==null){
+                ImageLoader.loadDefault(mContext,(ImageView) helper.getView(R.id.img_zhihu));
             }
 
         }
