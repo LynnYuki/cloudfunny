@@ -9,4 +9,9 @@
         android:title="图片搜索"
         app:showAsAction="never"
         tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/relocation"
+        android:orderInCategory="1"
+        android:title="刷新天气"
+        tools:ignore="HardcodedText"/>
 </menu>

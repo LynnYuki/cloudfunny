@@ -1,0 +1,36 @@
+{
+  "HeWeather6": [
+    {
+      "basic": {
+        "cid": "CN101250101",
+        "location": "长沙",
+        "parent_city": "长沙",
+        "admin_area": "湖南",
+        "cnty": "中国",
+        "lat": "28.19408989",
+        "lon": "112.98227692",
+        "tz": "+8.00"
+      },
+      "update": {
+        "loc": "2018-05-28 20:52",
+        "utc": "2018-05-28 12:52"
+      },
+      "status": "ok",
+      "now": {
+        "cloud": "0",
+        "cond_code": "101",
+        "cond_txt": "多云",
+        "fl": "29",
+        "hum": "57",
+        "pcpn": "0.0",
+        "pres": "1009",
+        "tmp": "27",
+        "vis": "10",
+        "wind_deg": "160",
+        "wind_dir": "东南风",
+        "wind_sc": "0",
+        "wind_spd": "1"
+      }
+    }
+  ]
+}

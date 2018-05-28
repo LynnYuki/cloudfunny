@@ -1,4 +1,4 @@
-package com.example.lynnyuki.cloudfunny.view.Unsplash;
+package com.example.lynnyuki.cloudfunny.view.Image;
 
 
 import android.annotation.SuppressLint;
@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.lynnyuki.cloudfunny.fragment.BaseFragment;
-import com.example.lynnyuki.cloudfunny.view.Unsplash.adpter.ImageAdapter;
+import com.example.lynnyuki.cloudfunny.view.Image.adpter.ImageAdapter;
 import com.example.lynnyuki.cloudfunny.base.BaseView;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.config.Constants;

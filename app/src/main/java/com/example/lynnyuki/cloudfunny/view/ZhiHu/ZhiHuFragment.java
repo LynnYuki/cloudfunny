@@ -246,32 +246,6 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
         return url;
 
     }
-//    protected String loadHtml(ZhiHuContentBean zhiHuContentBean) {
-//    StringBuilder htmlSb = new StringBuilder("<!doctype html>\n<html><head>\n<meta charset=\"utf-8\">\n" +
-//            "\t<meta name=\"viewport\" content=\"width=device-width,user-scalable=no\">");
-//
-//    String content = zhiHuContentBean.getBody();
-//    String css = "<link rel=\"stylesheet\" href=\"file:///android_asset/css/zhihu_daily.css\" type=\"text/css\">\n";
-//    String img_replace = "<script src=\"file:///android_asset/img_replace.js\"></script>\n";
-//    String video = "<script src=\"file:///android_asset/video.js\"></script>\n";
-//    String zepto = "<script src=\"file:///android_asset/zepto.min.js\"></script>\n";
-//    String autoLoadImage = "onload=\"onLoaded()\"";
-//    boolean autoLoad = AppNetWorkUtil.getNetworkSubType(getContext()).equals("WIFI") ;
-//    htmlSb.append(css)
-//            .append(zepto)
-//            .append(img_replace)
-//            .append(video)
-//            .append("</head><body className=\"\"")
-//            .append(autoLoad ? autoLoadImage : "")
-//            .append(" >")
-//            .append(content);
-//    htmlSb.append("</body></html>");
-//    String html = htmlSb.toString();
-//
-//    html = html.replace("<div class=\"img-place-holder\">", "");
-//    Log.e("html1", html);
-//    return html;
-//}
 
 
 

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import com.example.lynnyuki.cloudfunny.view.Unsplash.ImageFragment;
+import com.example.lynnyuki.cloudfunny.view.Image.ImageFragment;
 
 /**
  * 图片加载ViewPager适配器

@@ -61,6 +61,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
 
     private String url;
 
+
     private String title;
 
     private boolean isZhiHuUrl;
@@ -106,6 +107,8 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             title = bundle.getString("title");
             isZhiHuUrl = bundle.getBoolean("isZhiHuUrl");
             isShowLikeIcon = bundle.getBoolean("isshow");
+
+
         }
         setTitle(title);
         initWebView();
@@ -284,16 +287,23 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
 //                SnackBarUtils.show(webView, R.string.copy_msg, this);
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "分享图片");
-                intent.putExtra(Intent.EXTRA_TEXT, url);
+                intent.putExtra(Intent.EXTRA_SUBJECT, "分享文章");
+                intent.putExtra(Intent.EXTRA_TEXT, guid);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(Intent.createChooser(intent, "分享图片"));
+                context.startActivity(Intent.createChooser(intent, "分享文章"));
                 break;
             case R.id.item_browser:
-                Uri uri = Uri.parse(url);
+                if (isZhiHuUrl){
+                Uri uri = Uri.parse(guid);
                 Intent intent1 = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent1);
                 Log.e(TAG,"url不为空");
+                }else{
+                    Uri uri = Uri.parse(url);
+                    Intent intent1 = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent1);
+                }
+
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -355,7 +365,6 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             this.url = url;
             return this;
         }
-
 
         public Builder setIsZhiHuUrl(boolean isZhiHuUrl) {
             this.isZhiHuUrl = isZhiHuUrl;

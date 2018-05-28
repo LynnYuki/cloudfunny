@@ -1,13 +1,11 @@
-package com.example.lynnyuki.cloudfunny.view.Unsplash.adpter;
+package com.example.lynnyuki.cloudfunny.view.Image.adpter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -16,7 +14,7 @@ import com.bumptech.glide.Priority;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.config.GlideApp;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.lynnyuki.cloudfunny.view.Unsplash.ImageActivity;
+import com.example.lynnyuki.cloudfunny.view.Image.ImageActivity;
 
 import java.util.List;
 

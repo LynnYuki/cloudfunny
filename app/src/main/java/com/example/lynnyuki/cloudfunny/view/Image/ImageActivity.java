@@ -1,4 +1,4 @@
-package com.example.lynnyuki.cloudfunny.view.Unsplash;
+package com.example.lynnyuki.cloudfunny.view.Image;
 
 import android.content.Context;
 import android.content.Intent;

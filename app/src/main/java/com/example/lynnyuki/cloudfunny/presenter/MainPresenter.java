@@ -4,6 +4,9 @@ package com.example.lynnyuki.cloudfunny.presenter;
 import android.Manifest;
 import android.content.Context;
 
+import com.example.lynnyuki.cloudfunny.config.Constants;
+import com.example.lynnyuki.cloudfunny.model.bean.WeatherBean;
+import com.example.lynnyuki.cloudfunny.model.http.WeatherApi;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.example.lynnyuki.cloudfunny.base.BaseSubscriber;
 import com.example.lynnyuki.cloudfunny.base.RxBus;
@@ -24,13 +27,15 @@ import io.reactivex.schedulers.Schedulers;
 public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
 
+    private WeatherApi weatherApi;
 
     private RxPermissions rxPermissions;
 
     private Context context;
 
     @Inject
-    public MainPresenter( RxPermissions rxPermissions, Context context) {
+    public MainPresenter( RxPermissions rxPermissions, Context context,WeatherApi weatherApi) {
+        this.weatherApi = weatherApi;
         this.rxPermissions = rxPermissions;
         this.context = context;
     }
@@ -59,7 +64,18 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                     }
                 }));
     }
-
+    @Override
+    public void getWeather(String location) {
+        addSubscribe(weatherApi.getWeather(location, Constants.WEATHER_KEY)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new BaseSubscriber<WeatherBean>(context, mView) {
+                    @Override
+                    public void onNext(WeatherBean weatherBean) {
+                        mView.showWeather(weatherBean);
+                    }
+                }));
+    }
 
     @Override
     public void setDayOrNight() {

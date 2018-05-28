@@ -72,10 +72,11 @@ public class LikeFragment extends BaseFragment {
                     JZVideoPlayerStandard.startFullscreen(mContext, JZVideoPlayerStandard.class, bean.getUrl(), bean.getTitle());
                 } else {
                     WebActivity.open(new WebActivity.Builder()
-                            .setGuid(bean.getUrl())
+                            .setGuid(bean.getGuid())
                             .setImgUrl(bean.getImageUrl())
                             .setType(bean.getType())
                             .setUrl(bean.getUrl())
+                            .setIsZhiHuUrl(true)
                             .setTitle(bean.getTitle())
                             .setShowLikeIcon(true)
                             .setContext(mContext)

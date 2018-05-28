@@ -12,10 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.base.BaseMVPActivity;
 import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
@@ -24,10 +32,13 @@ import com.example.lynnyuki.cloudfunny.contract.MainContract;
 import com.example.lynnyuki.cloudfunny.dagger.component.DaggerMainActivityComponent;
 import com.example.lynnyuki.cloudfunny.dagger.module.MainActivityModule;
 import com.example.lynnyuki.cloudfunny.fragment.OneFragment;
+import com.example.lynnyuki.cloudfunny.model.bean.WeatherBean;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
 import com.example.lynnyuki.cloudfunny.presenter.MainPresenter;
 import com.example.lynnyuki.cloudfunny.util.AppExitUtil;
 import com.example.lynnyuki.cloudfunny.util.BottomNavigationViewHelper;
+import com.example.lynnyuki.cloudfunny.util.ImageLoader;
+import com.example.lynnyuki.cloudfunny.util.WeatherUtil;
 import com.example.lynnyuki.cloudfunny.view.About.AboutActivity;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerFragment;
 import com.example.lynnyuki.cloudfunny.view.Eyepetizer.EyepetizerHotFragment;
@@ -76,12 +87,36 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     @Inject
     SharePrefManager sharePrefManager;
 
+    private View mHeaderView;
+
+    private TextView mTxtCity;
+
+    private TextView mTxtWeather;
+
+    private ImageView mImgWeather;
+
+    private TextView mTextTemperature;
+
+    private ImageView mImgWeatherBg;
+
+
+    // 百度定位初始化
+    public LocationClient mlocationClient;
+    public static String currentPosition = "";
+
+    /**
+     * 加载布局
+     * @return
+     */
     @Override
     public int getLayoutId() {
 
         return R.layout.activity_main;
     }
 
+    /**
+     * 初始化Dagger组件
+     */
     @Override
     protected void initInject() {
         DaggerMainActivityComponent
@@ -93,24 +128,54 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     }
 
 
-
+    /**
+     * 初始化
+     */
 
     @Override
     protected void initialize() {
         // 需要theme 设置成 NoActionBar
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
+        WeatherUtil.init(mContext);
+
+        mHeaderView = navigationView.getHeaderView(0);
+        mTxtCity = mHeaderView.findViewById(R.id.txt_city);
+        mTxtWeather = mHeaderView.findViewById(R.id.txt_weather);
+        mImgWeather = mHeaderView.findViewById(R.id.img_weather);
+        mTextTemperature = mHeaderView.findViewById(R.id.txt_temperature);
+        mImgWeatherBg = mHeaderView.findViewById(R.id.img_weather_bg);
+
+        if (sharePrefManager.getNightMode()) {
+            ImageLoader.loadAll(mContext, R.drawable.bg_weather_night, mImgWeatherBg);
+        } else {
+            ImageLoader.loadAll(mContext, R.drawable.bg_weather_day, mImgWeatherBg);
+        }
         // 关联左上角图标和侧滑菜单
 //        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
 //        mToggle.syncState();
 //        mDrawerLayout.addDrawerListener(mToggle);
+
         BottomNavigationViewHelper.disableShiftMode(mBottomNav);
         mBottomNav.setOnNavigationItemSelectedListener(this);
-
         mPresenter.checkPermissions();
         mPresenter.setDayOrNight();
-        initDialog();
+//        initDialog();
 
+    }
+
+    /**
+     * 定位初始化
+     */
+    private void initLocation() {
+        // 定位权限初始化
+        mlocationClient = new LocationClient(getApplicationContext());
+        mlocationClient.registerLocationListener(new MyLocationListener());
+        LocationClientOption option = new LocationClientOption();
+        //返回定位地址信息
+        option.setIsNeedAddress(true);
+        mlocationClient.setLocOption(option);
+        mlocationClient.start();
     }
 
     /**
@@ -118,6 +183,7 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
      * @param search
      * @return
      */
+
     @Override
     public boolean onCreateOptionsMenu(Menu search) {
         getMenuInflater().inflate(R.menu.menu_main, search);
@@ -129,12 +195,18 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
      * @param item
      * @return
      */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.search_image:
                 startActivity(new Intent(mContext, ImageSearchActivity.class));
             break;
+            case R.id.relocation:
+               mlocationClient.restart();
+               if (currentPosition!=null){
+               mPresenter.getWeather(currentPosition);
+               }
         }
         return true;
     }
@@ -142,6 +214,7 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     /**
      * 初始化Fragment
      */
+
     private  void initFragment(){
 
         likeFragment = new LikeFragment();
@@ -156,6 +229,7 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     /**
      * 获取权限提示框
      */
+
     private void initDialog() {
         dialog = new MaterialDialog.Builder(mContext)
                 .title(R.string.permission_application)
@@ -185,6 +259,37 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     }
 
     /**
+     * 百度定位回调监听器
+     */
+    public class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            currentPosition = bdLocation.getCity();
+            if (bdLocation.getCity()!=null){
+                mPresenter.getWeather(bdLocation.getCity());//传入获得的城市名称
+                Toast.makeText(mContext,currentPosition+"定位成功",Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(mContext, "定位错误，可能没有获取到定位权限，请打开定位权限后重新下打开此应用", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    /**
+     * 获取天气信息成功
+     *
+     * @param weatherBean
+     */
+    @Override
+    public void showWeather(WeatherBean weatherBean) {
+        if (weatherBean!=null){
+        mTxtCity.setText(weatherBean.getHeWeather6().get(0).getBasic().getLocation());
+        mTxtWeather.setText(weatherBean.getHeWeather6().get(0).getNow().getCond_txt() + " " + weatherBean.getHeWeather6().get(0).getNow().getWind_dir());
+        mTextTemperature.setText(weatherBean.getHeWeather6().get(0).getNow().getTmp() + "°");
+        ImageLoader.loadAllAsBitmap(mContext, WeatherUtil.getImageUrl(weatherBean.getHeWeather6().get(0).getNow().getCond_code()), mImgWeather);
+        Log.e(TAG,"获取天气信息成功");
+        }
+    }
+    /**
      * 返回键监听
      */
     @Override
@@ -212,6 +317,8 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
         //设置抽屉菜单Item选中
 //       navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setNavigationItemSelectedListener(this);
+        initLocation();
+        Log.e(TAG,"定位初始化");
     }
 
 
@@ -290,8 +397,21 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
 
         return true;
     }
+
+
+
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        /**
+         * 销毁定位
+         * 如果AMapLocationClient是在当前Activity实例化的，
+         * 在Activity的onDestroy中一定要执行AMapLocationClient的onDestroy
+         */
+        mlocationClient.stop();
+
     }
+
+
+
 }

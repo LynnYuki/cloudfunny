@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -23,6 +24,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="FTFT0kZEFuo2XmkmmdnZkR7MhtCH5Wl6" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
         <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +46,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/DrawerLayoutTheme"/>
 
-        <activity android:name=".view.Unsplash.ImageActivity"
+        <activity android:name=".view.Image.ImageActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -58,6 +69,16 @@
         <activity android:name=".view.ImageSearch.ImageSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WebTheme"/>
+
+        <!--&lt;!&ndash;定位&ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="com.amap.api.v2.apikey"-->
+            <!--android:value="81ef7c9d231c0f7826fe2efc9da36664" />-->
+
+        <!--&lt;!&ndash;定位需要的服务&ndash;&gt;-->
+        <!--<service android:name="com.amap.api.location.APSService"/>-->
+
+
 
 
 

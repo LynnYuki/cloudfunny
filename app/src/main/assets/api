@@ -37,3 +37,6 @@ http://baobab.kaiyanapp.com/api/v4/video/related?id=45897
 第一个item 上页数据 有
 第二个item 上页 可无
 第三个item 请求相关接口
+
+和风天气
+//https://free-api.heweather.com/s6/weather/now?location=changsha&key=ba75e2ae21814e53a9b1061ba6f5ffe0

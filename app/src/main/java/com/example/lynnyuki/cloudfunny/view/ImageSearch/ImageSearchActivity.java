@@ -2,14 +2,11 @@ package com.example.lynnyuki.cloudfunny.view.ImageSearch;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -18,16 +15,14 @@ import com.example.lynnyuki.cloudfunny.R;
 import com.example.lynnyuki.cloudfunny.base.BaseActivity;
 import com.example.lynnyuki.cloudfunny.config.Constants;
 import com.example.lynnyuki.cloudfunny.util.AppNetWorkUtil;
-import com.example.lynnyuki.cloudfunny.view.Unsplash.adpter.ImageAdapter;
+import com.example.lynnyuki.cloudfunny.view.Image.adpter.ImageAdapter;
 import com.kc.unsplash.Unsplash;
 import com.kc.unsplash.api.Order;
 import com.kc.unsplash.models.Photo;
 import com.kc.unsplash.models.SearchResults;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 import butterknife.BindView;
 
