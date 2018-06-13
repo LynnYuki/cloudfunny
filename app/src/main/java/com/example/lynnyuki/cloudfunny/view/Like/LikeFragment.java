@@ -1,12 +1,15 @@
 package com.example.lynnyuki.cloudfunny.view.Like;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -19,8 +22,12 @@ import com.example.lynnyuki.cloudfunny.config.CloudFunnyApplication;
 import com.example.lynnyuki.cloudfunny.model.bean.LikeBean;
 import com.example.lynnyuki.cloudfunny.model.db.LikeBeanGreenDaoManager;
 import com.example.lynnyuki.cloudfunny.model.prefs.SharePrefManager;
+import com.example.lynnyuki.cloudfunny.view.ImageSearch.ImageSearchActivity;
 import com.example.lynnyuki.cloudfunny.view.Like.adapter.LikeAdapter;
 import com.example.lynnyuki.cloudfunny.view.Web.WebActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,7 +41,7 @@ import cn.jzvd.JZVideoPlayerStandard;
  */
 
 public class LikeFragment extends BaseFragment {
-
+    public final String TAG = "LikeFragment";
     @BindView(R.id.recyclerview_like)
     RecyclerView recyclerView;
 
@@ -87,7 +94,7 @@ public class LikeFragment extends BaseFragment {
         likeAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
-            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
+            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int  position) {
                 final LikeBean bean = (LikeBean) adapter.getData().get(position);
                 new MaterialDialog.Builder(mContext)
                         .content("确认要删除该收藏吗？")
@@ -116,8 +123,24 @@ public class LikeFragment extends BaseFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        inflater.inflate(R.menu.image_search, menu);
+//        inflater.inflate(R.menu.delete_like, menu);
     }
+
+//    /**
+//     * 菜单点击事件
+//     * @param item
+//     * @return
+//     */
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.search_delete:
+//                daoManager.deleteAllData();
+//                likeAdapter.notifyDataSetChanged();
+//
+//                }
+//        return true;
+//    }
 
     @Override
     public void onResume() {

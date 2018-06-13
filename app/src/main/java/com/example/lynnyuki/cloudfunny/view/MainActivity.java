@@ -206,6 +206,9 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
                mlocationClient.restart();
                if (currentPosition!=null){
                mPresenter.getWeather(currentPosition);
+               Toast.makeText(this,"刷新天气成功",Toast.LENGTH_SHORT).show();
+               }else {
+                   Toast.makeText(this,"刷新天气失败",Toast.LENGTH_SHORT).show();
                }
         }
         return true;

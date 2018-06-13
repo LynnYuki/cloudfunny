@@ -83,6 +83,7 @@ public class LikeBeanGreenDaoManager {
         }
     }
 
+
     /**
      * 根据guid删除
      */
@@ -104,5 +105,14 @@ public class LikeBeanGreenDaoManager {
      */
     public void delete(LikeBean likeBean) {
         getLikeBeanDao().delete(likeBean);
+    }
+
+
+    /**
+     * 删除全部数据
+     *
+     */
+    public  void deleteAllData() {
+        getLikeBeanDao().deleteAll();
     }
 }

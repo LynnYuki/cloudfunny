@@ -145,7 +145,9 @@ public class ImageFragment extends BaseFragment implements BaseQuickAdapter.Requ
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(getContext(), "网络连接错误。", Toast.LENGTH_SHORT).show();
+                    Log.e("Error", error);
+                    Log.e(TAG,"图片加载失败");
+                    Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
                     swipeRefreshLayout.setRefreshing(false);
                 }
             });

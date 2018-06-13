@@ -70,13 +70,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/WebTheme"/>
 
-        <!--&lt;!&ndash;定位&ndash;&gt;-->
-        <!--<meta-data-->
-            <!--android:name="com.amap.api.v2.apikey"-->
-            <!--android:value="81ef7c9d231c0f7826fe2efc9da36664" />-->
-
-        <!--&lt;!&ndash;定位需要的服务&ndash;&gt;-->
-        <!--<service android:name="com.amap.api.location.APSService"/>-->
 
 
 
