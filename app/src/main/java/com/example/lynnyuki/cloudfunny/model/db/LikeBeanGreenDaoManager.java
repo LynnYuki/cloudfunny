@@ -65,7 +65,7 @@ public class LikeBeanGreenDaoManager {
     }
 
     /**
-     * 根据Guid查询
+     * 根据收藏标识查询
      *
      * @param guid
      * @return
@@ -85,7 +85,7 @@ public class LikeBeanGreenDaoManager {
 
 
     /**
-     * 根据guid删除
+     * 根据收藏标识删除
      */
     public void deleteByGuid(String guid) {
         LikeBean bean = getLikeBeanDao()
@@ -108,11 +108,5 @@ public class LikeBeanGreenDaoManager {
     }
 
 
-    /**
-     * 删除全部数据
-     *
-     */
-    public  void deleteAllData() {
-        getLikeBeanDao().deleteAll();
-    }
+
 }

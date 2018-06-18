@@ -21,6 +21,11 @@ public class LikeAdapter extends BaseQuickAdapter<LikeBean, BaseViewHolder> {
         super(R.layout.item_like);
     }
 
+    /**
+     * 收藏界面UI数据绑定
+     * @param helper
+     * @param item
+     */
     @Override
     protected void convert(BaseViewHolder helper, LikeBean item) {
         helper.setText(R.id.txt_like_title, item.getTitle());

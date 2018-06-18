@@ -57,6 +57,9 @@ public class LikeFragment extends BaseFragment {
         return R.layout.fragment_like;
     }
 
+    /**
+     * 初始化收藏数据
+     */
     @Override
     protected void initialize() {
         setHasOptionsMenu(true);
@@ -91,6 +94,9 @@ public class LikeFragment extends BaseFragment {
                 }
             }
         });
+        /**
+         * 收藏列表长按点击事件
+         */
         likeAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override

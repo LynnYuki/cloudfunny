@@ -73,7 +73,7 @@ public abstract class BaseFragment extends SupportFragment {
         myBinder.unbind();
         Log.d(TAG,"销毁");
     }
-
+    //设置Fragment可见
     @Override
     public void setMenuVisibility(boolean menuVisibility){
         super.setMenuVisibility(menuVisibility);

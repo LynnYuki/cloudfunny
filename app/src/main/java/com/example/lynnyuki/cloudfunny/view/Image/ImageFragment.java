@@ -154,7 +154,10 @@ public class ImageFragment extends BaseFragment implements BaseQuickAdapter.Requ
 
     }
 
-@Override
+    /**
+     * 下拉刷新图片数据
+     */
+    @Override
 public void onRefresh() {
     final int randomPage2 = random.nextInt(50);
     if(!AppNetWorkUtil.isNetworkConnected(getContext())){

@@ -267,8 +267,10 @@ public  class MainActivity extends BaseMVPActivity<MainPresenter> implements Mai
     public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
+            //获取定位城市
             currentPosition = bdLocation.getCity();
             if (bdLocation.getCity()!=null){
+                //根据获取的城市请求天气信息
                 mPresenter.getWeather(bdLocation.getCity());//传入获得的城市名称
                 Toast.makeText(mContext,currentPosition+"定位成功",Toast.LENGTH_SHORT).show();
             }else{

@@ -208,6 +208,10 @@ public class ZhiHuFragment extends BaseMVPFragment<ZhiHuPresenter> implements Zh
 
     }
 
+    /**
+     * 获取文章详情
+     * @param zhiHuContentBean
+     */
     @Override
     public void showZhiHuContent(ZhiHuContentBean zhiHuContentBean) {
         isOK = true;

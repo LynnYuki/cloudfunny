@@ -11,7 +11,7 @@ import com.example.lynnyuki.cloudfunny.util.SnackBarUtils;
 import javax.inject.Inject;
 
 /**
- * 带MVP和Dagger2的Activity基类
+ * 带MVP和Dagger2的Fragment基类
  *
  */
 

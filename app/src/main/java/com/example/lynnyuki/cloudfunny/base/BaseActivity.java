@@ -44,11 +44,7 @@ public abstract class BaseActivity extends SupportActivity {
     }
 
     protected  void onViewCreated(){
-
-    }
-
-
-
+        }
 
     @Override
     protected  void onDestroy(){

@@ -84,6 +84,11 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         return true;
     }
 
+    /**
+     * 设置按钮点击事件
+     * @param preference
+     * @return
+     */
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference == cleanCachePreference) {

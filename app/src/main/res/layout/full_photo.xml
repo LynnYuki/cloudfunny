@@ -21,6 +21,17 @@
         app:srcCompat="@color/colorAccent"
         tools:ignore="ContentDescription" />
 
+        <TextView
+            android:id="@+id/update_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="2018-06-16"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/Photo"
+            />
+
 
     <android.support.v7.widget.Toolbar
         android:id="@id/toolbar"

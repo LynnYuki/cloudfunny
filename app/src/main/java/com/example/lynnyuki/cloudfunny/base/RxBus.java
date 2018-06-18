@@ -7,7 +7,7 @@ import io.reactivex.processors.FlowableProcessor;
 import io.reactivex.processors.PublishProcessor;
 
 /**
- * RX网络请求
+ * RX事件总线
  */
 
 public class RxBus {

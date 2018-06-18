@@ -5,8 +5,7 @@ import android.app.Activity;
 import java.util.Stack;
 
 /**
- * 管理和回收Act
- * Created by xiarh on 2017/9/13.
+ * 管理和回收Activity
  */
 
 public class AppActivityTaskManager {

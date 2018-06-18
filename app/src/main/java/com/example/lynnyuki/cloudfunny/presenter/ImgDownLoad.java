@@ -74,7 +74,7 @@ public class ImgDownLoad {
 
 
     /**
-     * Get image from newwork
+     * 发起GET请求下载图片
      * @param path The path of image
      * @return InputStream
      * @throws Exception
@@ -92,7 +92,7 @@ public class ImgDownLoad {
 
 
     /**
-     * 保存文件
+     * 保存图片
      * @param bm
      * @param fileName
      * @throws IOException

@@ -45,6 +45,9 @@ public class AboutActivity extends BaseActivity {
 
     }
 
+    /**
+     * 菜单点击事件
+     */
     @OnClick(R.id.txt_github)
     public void onTxtGithubClicked() {
         WebActivity.open(new WebActivity.Builder()

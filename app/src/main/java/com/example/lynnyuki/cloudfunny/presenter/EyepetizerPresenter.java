@@ -33,6 +33,11 @@ public class EyepetizerPresenter extends RxPresenter<EyepetizerContract.View> im
         this.context = context;
     }
 
+    /**
+     * 获取热门视频数据
+     * @param page
+     * @param udid
+     */
     @Override
     public void getDailyVideoData(int page, String udid) {
         addSubscribe(eyepetizerApi.getDailyVideo(page, udid)
@@ -52,7 +57,14 @@ public class EyepetizerPresenter extends RxPresenter<EyepetizerContract.View> im
                 }));
     }
 
-
+    /**
+     * 获取日常更新视频数据
+     * @param page
+     * @param udid
+     * @param strategy
+     * @param vc
+     * @param deviceModel
+     */
     @Override
     public void getVideoData(final int page, final String udid, String strategy, String vc, String deviceModel) {
         addSubscribe(eyepetizerApi.getHotVideo(strategy, vc, deviceModel)

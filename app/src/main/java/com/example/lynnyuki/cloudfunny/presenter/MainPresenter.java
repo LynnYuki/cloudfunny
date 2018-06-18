@@ -41,7 +41,9 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     }
 
 
-
+    /**
+     * 获取权限
+     */
     @Override
     public void checkPermissions() {
         addSubscribe(rxPermissions.request(Manifest.permission.READ_PHONE_STATE
@@ -64,6 +66,11 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                     }
                 }));
     }
+
+    /**
+     * 获取天气数据
+     * @param location
+     */
     @Override
     public void getWeather(String location) {
         addSubscribe(weatherApi.getWeather(location, Constants.WEATHER_KEY)
@@ -77,6 +84,9 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                 }));
     }
 
+    /**
+     *判断是否是夜间模式
+     */
     @Override
     public void setDayOrNight() {
         addSubscribe(RxBus.getInstance().register(Integer.class)

@@ -42,6 +42,11 @@ public class ZhiHuAdapter extends BaseQuickAdapter<ZhiHuBean.StoriesBean, BaseVi
 
     }
 
+    /**
+     * 知乎UI数据绑定
+     * @param helper
+     * @param item
+     */
     @Override
         protected void convert(BaseViewHolder helper,ZhiHuBean.StoriesBean item){
         if (item!=null && page ==1 ){

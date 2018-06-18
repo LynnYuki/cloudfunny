@@ -62,6 +62,9 @@ public class SettingActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * 返回操作
+     */
     private void goBack() {
         int a = sharePrefManager.getLocalMode();
         int b = AppCompatDelegate.getDefaultNightMode();

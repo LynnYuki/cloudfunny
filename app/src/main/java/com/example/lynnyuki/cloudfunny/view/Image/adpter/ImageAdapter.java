@@ -51,6 +51,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>i
         return new ViewHolder(view);
     }
 
+    /**
+     * 加载图片
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
         final Photo photo = photoList.get(position);

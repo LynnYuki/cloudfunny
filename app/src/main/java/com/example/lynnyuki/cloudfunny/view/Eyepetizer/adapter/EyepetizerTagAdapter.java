@@ -16,6 +16,11 @@ public class EyepetizerTagAdapter extends BaseQuickAdapter<VideoBean.ItemListBea
         super(R.layout.item_eyepetizer_tag);
     }
 
+    /**
+     * 视频播放页面标签UI数据绑定
+     * @param helper
+     * @param item
+     */
     @Override
     protected void convert(BaseViewHolder helper, VideoBean.ItemListBean.DataBeanX.ContentBean.DataBean.TagBean item) {
         if(item!=null){

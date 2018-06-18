@@ -22,6 +22,11 @@ public class EyepetizerAdapter extends BaseQuickAdapter<VideoBean.ItemListBean, 
         super(R.layout.item_eyepetizer_daily);
     }
 
+    /**
+     * UI数据绑定和加载预览图
+     * @param helper
+     * @param item
+     */
     @Override
     protected void convert(BaseViewHolder helper, VideoBean.ItemListBean item) {
             if (item.getData().getContent()!=null && item.getType().equals("followCard")){

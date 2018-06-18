@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class LikeBean {
-    @Id
+    @Id(autoincrement = true)
     private Long id;
 
     private String guid;

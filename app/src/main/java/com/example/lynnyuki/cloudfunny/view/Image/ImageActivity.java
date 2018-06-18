@@ -1,5 +1,6 @@
 package com.example.lynnyuki.cloudfunny.view.Image;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 
 import com.example.lynnyuki.cloudfunny.R;
@@ -33,9 +35,12 @@ public class ImageActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.Photo)
     ImageView imageView;
+    @BindView(R.id.update_at)
+    TextView update_at;
     Photo photo;
     Context context = this;//必须初始化否则引起空指针异常
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,7 @@ public class ImageActivity extends BaseActivity {
         photo = getIntent().getParcelableExtra("URLS");
         setTitle(photo.getUser().getName());
         imgUrl = photo.getUrls().getRegular();
+        update_at.setText("拍摄时间："+photo.getUpdatedAt());
         Log.d(TAG, imgUrl);
         ImageLoader.loadUnsplash(context,imgUrl,imageView);
     }
@@ -68,6 +74,11 @@ public class ImageActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * 图片分享
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

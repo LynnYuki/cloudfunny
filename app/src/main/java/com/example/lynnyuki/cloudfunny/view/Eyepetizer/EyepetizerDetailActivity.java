@@ -37,7 +37,9 @@ import cn.jzvd.JZVideoPlayerStandard;
  */
 
 public class EyepetizerDetailActivity extends BaseActivity {
-
+    /**
+     * 初始化UI
+     */
     @BindView(R.id.txt_video_title)
     TextView txtVideoTitle;
     @BindView(R.id.txt_video_subtitle)
@@ -71,6 +73,10 @@ public class EyepetizerDetailActivity extends BaseActivity {
 
     private Boolean isLiked;
 
+    /**
+     * 加载布局
+     * @return
+     */
     @Override
     protected int getLayoutId() {
         return R.layout.activity_eyepetizer_detail;
@@ -107,6 +113,9 @@ public class EyepetizerDetailActivity extends BaseActivity {
 //        });
 //    }
 
+    /**
+     * 初始化数据
+     */
     @SuppressLint("SetTextI18n")
     private void initData() {
         Intent intent = getIntent();
@@ -132,6 +141,9 @@ public class EyepetizerDetailActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 设置视频播放码率
+     */
     private void initVideoPlayer() {
         LinkedHashMap map = new LinkedHashMap();
 
@@ -161,6 +173,9 @@ public class EyepetizerDetailActivity extends BaseActivity {
         JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     }
 
+    /**
+     * 视频分享
+     */
     @OnClick(R.id.layout_share)
     public void onLayoutShareClick() {
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -172,6 +187,10 @@ public class EyepetizerDetailActivity extends BaseActivity {
             mContext.startActivity(Intent.createChooser(intent, videoBean.getContent().getData().getTitle()));
         }
     }
+
+    /**
+     * 视频收藏
+     */
     @OnClick(R.id.img_video_collection)
     public void onImgVideoCollectionClick() {
         if (isLiked) {

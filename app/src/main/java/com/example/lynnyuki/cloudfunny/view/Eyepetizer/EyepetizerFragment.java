@@ -167,6 +167,10 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
         swipeRefreshLayout.setEnabled(false);
     }
 
+    /**
+     * 展示日常视频列表
+     * @param dailyBean
+     */
     @Override
     public void showDailyVideoData(VideoBean dailyBean) {
         List<VideoBean.ItemListBean> itemListBeans = new ArrayList<>();
@@ -202,6 +206,9 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
         }
     }
 
+    /**
+     * 获取视频数据失败
+     */
     @Override
     public void failGetDailyData() {
         dailyAdapter.loadMoreFail();
@@ -209,6 +216,10 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    /**
+     * 展示热门视频数据
+     * @param hotBean
+     */
     @Override
     public void showHotVideoData(VideoBean hotBean) {
         if (hotBean != null) {
@@ -220,6 +231,9 @@ public class EyepetizerFragment extends BaseMVPFragment<EyepetizerPresenter> imp
         }
     }
 
+    /**
+     * 热门视频获取失败
+     */
     @Override
     public void failGetHotData() {
         Toast.makeText(mContext,"服务器错误，无法获取到数据。",Toast.LENGTH_SHORT).show();

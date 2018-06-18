@@ -30,6 +30,10 @@ public class ZhiHuPresenter extends RxPresenter<ZhiHuContract.View> implements Z
         this.context = context;
 
     }
+
+    /**
+     * 获取知乎当日数据
+     */
     @Override
     public void getZhiHuData() {
         addSubscribe(zhiHuApi.getZhiHu()
@@ -49,6 +53,10 @@ public class ZhiHuPresenter extends RxPresenter<ZhiHuContract.View> implements Z
 
     }
 
+    /**
+     * 获取知乎具体内容
+     * @param id
+     */
     @Override
     public void getZhiHuContent(int id) {
 
@@ -70,6 +78,10 @@ public class ZhiHuPresenter extends RxPresenter<ZhiHuContract.View> implements Z
 
     }
 
+    /**
+     * 获取知乎之前日期数据
+     * @param date
+     */
     @Override
     public void getZhiHuBefore(String date) {
         addSubscribe(zhiHuApi.getZhiHuBefore(date)

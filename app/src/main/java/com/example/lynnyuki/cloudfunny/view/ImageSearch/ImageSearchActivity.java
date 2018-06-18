@@ -61,6 +61,11 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
         Photos(1,15,Order.LATEST);
     }
 
+    /**
+     * 创建搜索栏
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.image_search, menu);
@@ -107,6 +112,12 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    /**
+     * 请求搜索的关键字的图片
+     * @param f
+     * @param l
+     * @param order
+     */
     private void Photos(int f, int l, Order order) {
         unsplash.getPhotos(f, l, order, new Unsplash.OnPhotosLoadedListener() {
             @Override
@@ -125,6 +136,11 @@ public class ImageSearchActivity extends BaseActivity implements SwipeRefreshLay
             }
         });
     }
+
+    /**
+     * 发起搜索
+     * @param query
+     */
     private void SearchQuery(String query) {
         unsplash.searchPhotos(query, new Unsplash.OnSearchCompleteListener() {
             @Override

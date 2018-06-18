@@ -46,7 +46,7 @@ public class LikeBeanDao extends AbstractDao<LikeBean, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"LIKE_BEAN\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"GUID\" TEXT," + // 1: guid
                 "\"IMAGE_URL\" TEXT," + // 2: imageUrl
                 "\"TITLE\" TEXT," + // 3: title

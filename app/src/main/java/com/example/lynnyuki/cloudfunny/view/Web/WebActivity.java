@@ -206,6 +206,9 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                         .show();
             }
         });
+        /**
+         * 页面滑动监听
+         */
         webView.setOnScrollListener(new X5WebView.IScrollListener() {
             @Override
             public void onScrollChanged(int scrollY) {
@@ -257,6 +260,11 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         return true;
     }
 
+    /**
+     * 创建收藏菜单
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

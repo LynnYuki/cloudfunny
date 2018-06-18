@@ -1,11 +1,8 @@
 package com.example.lynnyuki.cloudfunny.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -32,6 +29,7 @@ public class SplashActivity extends FragmentActivity {
         alphaAnimation .setDuration(1000);
         view.startAnimation(alphaAnimation);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener(){
+
             @Override
             public  void onAnimationStart(Animation animation){
 
